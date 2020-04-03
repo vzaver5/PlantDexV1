@@ -10,13 +10,9 @@
         android:id="@+id/SciName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="31dp"
-        android:layout_marginTop="201dp"
-        android:layout_marginEnd="277dp"
-        android:layout_marginBottom="76dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:text="Scientific Name:"
-        app:layout_constraintBottom_toTopOf="@+id/ComName"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -24,27 +20,37 @@
         android:id="@+id/ComName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="31dp"
-        android:layout_marginTop="76dp"
-        android:layout_marginEnd="277dp"
-        android:layout_marginBottom="61dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="35dp"
         android:text="Common Name:"
-        app:layout_constraintBottom_toTopOf="@+id/ImageURL"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/SciName" />
 
     <TextView
-        android:id="@+id/ImageURL"
+        android:id="@+id/sciNameFill"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="31dp"
-        android:layout_marginTop="23dp"
-        android:layout_marginEnd="308dp"
-        android:layout_marginBottom="298dp"
-        android:text="Image URL:"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toEndOf="@+id/SciName"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/commNameFill"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        app:layout_constraintStart_toEndOf="@+id/ComName"
+        app:layout_constraintTop_toBottomOf="@+id/SciName" />
+
+    <ImageView
+        android:id="@+id/plantImage"
+        android:layout_width="128dp"
+        android:layout_height="128dp"
+        android:layout_marginStart="148dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ComName" />
+        app:layout_constraintStart_toEndOf="@+id/SciName"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
 </androidx.constraintlayout.widget.ConstraintLayout>
