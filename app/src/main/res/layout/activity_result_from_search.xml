@@ -4,53 +4,375 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/specificPlantFrag"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:scrollbarAlwaysDrawVerticalTrack="true"
+    android:scrollbars="vertical">
 
     <TextView
-        android:id="@+id/SciName"
+        android:id="@+id/seedInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="Scientific Name:"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginTop="15dp"
+        android:text="Seed Info"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/fruitSeedSeedPersistenceFill"
+        app:layout_constraintTop_toBottomOf="@+id/fruitSeedSeedPersistenceFill" />
 
     <TextView
-        android:id="@+id/ComName"
+        android:id="@+id/specificationInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="35dp"
-        android:text="Common Name:"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="15dp"
+        android:text="Specification Info"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/SciName" />
+        app:layout_constraintTop_toBottomOf="@+id/tempMinFFill" />
+
+    <TextView
+        android:id="@+id/growthInformation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="15dp"
+        android:text="Growth Info"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/flowerConsFill" />
+
+    <TextView
+        android:id="@+id/fruitSeedInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
+        android:text="Fruit Or Seed info"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/plantImage"
+        app:layout_constraintTop_toBottomOf="@+id/foliageTextureFill" />
 
     <TextView
         android:id="@+id/sciNameFill"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:layout_constraintStart_toEndOf="@+id/SciName"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_width="0dp"
+        android:layout_height="16dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:textAlignment="viewStart"
+        android:textAllCaps="false"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/plantImage"
+        app:layout_constraintTop_toBottomOf="@+id/addToGarden" />
 
     <TextView
         android:id="@+id/commNameFill"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
-        app:layout_constraintStart_toEndOf="@+id/ComName"
-        app:layout_constraintTop_toBottomOf="@+id/SciName" />
+        android:layout_width="0dp"
+        android:layout_height="16dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:textAlignment="viewStart"
+        android:textAllCaps="true"
+        app:layout_constraintStart_toEndOf="@+id/plantImage"
+        app:layout_constraintTop_toBottomOf="@+id/sciNameFill" />
+
+    <TextView
+        android:id="@+id/flowerColorFill"
+        android:layout_width="0dp"
+        android:layout_height="16dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:textAlignment="viewStart"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/flowerInfo" />
+
+    <TextView
+        android:id="@+id/flowerConsFill"
+        android:layout_width="0dp"
+        android:layout_height="16dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:textAlignment="viewStart"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/flowerColorFill" />
+
+    <TextView
+        android:id="@+id/foliageColorFill"
+        android:layout_width="0dp"
+        android:layout_height="16dp"
+        android:layout_marginTop="10dp"
+        android:textAlignment="viewStart"
+        app:layout_constraintStart_toStartOf="@+id/foliageInfo"
+        app:layout_constraintTop_toBottomOf="@+id/foliageInfo" />
+
+    <TextView
+        android:id="@+id/foliagePorositySummerFill"
+        android:layout_width="0dp"
+        android:layout_height="16dp"
+        android:layout_marginTop="10dp"
+        android:textAlignment="viewStart"
+        app:layout_constraintStart_toStartOf="@+id/foliageInfo"
+        app:layout_constraintTop_toBottomOf="@+id/foliageColorFill" />
+
+    <TextView
+        android:id="@+id/foliagePorosityWinterFill"
+        android:layout_width="0dp"
+        android:layout_height="16dp"
+        android:layout_marginTop="10dp"
+        android:textAlignment="viewStart"
+        app:layout_constraintStart_toStartOf="@+id/foliagePorositySummerFill"
+        app:layout_constraintTop_toBottomOf="@+id/foliagePorositySummerFill" />
+
+    <TextView
+        android:id="@+id/foliageTextureFill"
+        android:layout_width="0dp"
+        android:layout_height="16dp"
+        android:layout_marginTop="10dp"
+        android:textAlignment="viewStart"
+        app:layout_constraintStart_toStartOf="@+id/foliageInfo"
+        app:layout_constraintTop_toBottomOf="@+id/foliagePorosityWinterFill" />
+
+    <TextView
+        android:id="@+id/fruitSeedColorFill"
+        android:layout_width="0dp"
+        android:layout_height="16dp"
+        android:layout_marginTop="10dp"
+        android:textAlignment="viewStart"
+        app:layout_constraintStart_toStartOf="@+id/fruitSeedInfo"
+        app:layout_constraintTop_toBottomOf="@+id/fruitSeedInfo" />
+
+    <TextView
+        android:id="@+id/fruitSeedConsFill"
+        android:layout_width="0dp"
+        android:layout_height="16dp"
+        android:layout_marginTop="10dp"
+        android:textAlignment="viewStart"
+        app:layout_constraintStart_toStartOf="@+id/fruitSeedInfo"
+        app:layout_constraintTop_toBottomOf="@+id/fruitSeedColorFill" />
+
+    <TextView
+        android:id="@+id/fruitSeedSeedAbundanceFill"
+        android:layout_width="0dp"
+        android:layout_height="16dp"
+        android:layout_marginTop="12dp"
+        android:textAlignment="viewStart"
+        app:layout_constraintStart_toStartOf="@+id/fruitSeedInfo"
+        app:layout_constraintTop_toBottomOf="@+id/fruitSeedConsFill" />
+
+    <TextView
+        android:id="@+id/fruitSeedSeedPeriodBeginFill"
+        android:layout_width="0dp"
+        android:layout_height="16dp"
+        android:layout_marginTop="10dp"
+        android:textAlignment="viewStart"
+        app:layout_constraintStart_toStartOf="@+id/fruitSeedInfo"
+        app:layout_constraintTop_toBottomOf="@+id/fruitSeedSeedAbundanceFill" />
+
+    <TextView
+        android:id="@+id/fruitSeedSeedPeriodEndFill"
+        android:layout_width="0dp"
+        android:layout_height="16dp"
+        android:layout_marginTop="10dp"
+        android:textAlignment="viewStart"
+        app:layout_constraintStart_toStartOf="@+id/fruitSeedInfo"
+        app:layout_constraintTop_toBottomOf="@+id/fruitSeedSeedPeriodBeginFill" />
+
+    <TextView
+        android:id="@+id/fruitSeedSeedPersistenceFill"
+        android:layout_width="0dp"
+        android:layout_height="16dp"
+        android:layout_marginTop="10dp"
+        android:textAlignment="viewStart"
+        app:layout_constraintStart_toStartOf="@+id/fruitSeedInfo"
+        app:layout_constraintTop_toBottomOf="@+id/fruitSeedSeedPeriodEndFill" />
+
+    <TextView
+        android:id="@+id/growthPhMaxFill"
+        android:layout_width="0dp"
+        android:layout_height="16dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:textAlignment="viewStart"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/growthInformation" />
+
+    <TextView
+        android:id="@+id/growthPhMinFill"
+        android:layout_width="0dp"
+        android:layout_height="16dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:textAlignment="viewStart"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/growthPhMaxFill" />
+
+    <TextView
+        android:id="@+id/precipMaxInchesFill"
+        android:layout_width="0dp"
+        android:layout_height="16dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:textAlignment="viewStart"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/growthPhMinFill" />
+
+    <TextView
+        android:id="@+id/precipMinInchesFill"
+        android:layout_width="0dp"
+        android:layout_height="16dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:textAlignment="viewStart"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/precipMaxInchesFill" />
+
+    <TextView
+        android:id="@+id/tempMinCFill"
+        android:layout_width="0dp"
+        android:layout_height="16dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:textAlignment="viewStart"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/precipMinInchesFill" />
+
+    <TextView
+        android:id="@+id/tempMinFFill"
+        android:layout_width="0dp"
+        android:layout_height="16dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:textAlignment="viewStart"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tempMinCFill" />
+
+    <TextView
+        android:id="@+id/specificationGrowthFormFill"
+        android:layout_width="0dp"
+        android:layout_height="16dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:textAlignment="viewStart"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/specificationInfo" />
+
+    <TextView
+        android:id="@+id/specificationGrowthHabitFill"
+        android:layout_width="0dp"
+        android:layout_height="16dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:textAlignment="viewStart"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/specificationGrowthFormFill" />
+
+    <TextView
+        android:id="@+id/specificationGrowthRateFill"
+        android:layout_width="0dp"
+        android:layout_height="16dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:textAlignment="viewStart"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/specificationGrowthHabitFill" />
+
+    <TextView
+        android:id="@+id/specificationShapeOriFill"
+        android:layout_width="0dp"
+        android:layout_height="16dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:textAlignment="viewStart"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/specificationGrowthHabitFill" />
+
+    <TextView
+        android:id="@+id/seedBloomPeriodFill"
+        android:layout_width="0dp"
+        android:layout_height="16dp"
+        android:layout_marginTop="10dp"
+        android:textAlignment="viewStart"
+        app:layout_constraintStart_toStartOf="@+id/seedInfo"
+        app:layout_constraintTop_toBottomOf="@+id/seedInfo" />
+
+    <TextView
+        android:id="@+id/seedCommAvFill"
+        android:layout_width="0dp"
+        android:layout_height="16dp"
+        android:layout_marginTop="10dp"
+        android:textAlignment="viewStart"
+        app:layout_constraintStart_toStartOf="@+id/seedBloomPeriodFill"
+        app:layout_constraintTop_toBottomOf="@+id/seedBloomPeriodFill" />
+
+    <TextView
+        android:id="@+id/seedSeedSpreadRateFill"
+        android:layout_width="0dp"
+        android:layout_height="16dp"
+        android:layout_marginTop="10dp"
+        android:textAlignment="viewStart"
+        app:layout_constraintStart_toStartOf="@+id/seedCommAvFill"
+        app:layout_constraintTop_toBottomOf="@+id/seedCommAvFill" />
+
+    <TextView
+        android:id="@+id/seedSeedPerPoundFill"
+        android:layout_width="0dp"
+        android:layout_height="16dp"
+        android:layout_marginTop="10dp"
+        android:textAlignment="viewStart"
+        app:layout_constraintStart_toStartOf="@+id/seedSeedSpreadRateFill"
+        app:layout_constraintTop_toBottomOf="@+id/seedSeedSpreadRateFill" />
 
     <ImageView
         android:id="@+id/plantImage"
-        android:layout_width="128dp"
-        android:layout_height="128dp"
-        android:layout_marginStart="148dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="176dp"
+        android:contentDescription="Location of pictures of the plant"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/SciName"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
+
+    <Button
+        android:id="@+id/addToGarden"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="22dp"
+        android:text="Add To Garden"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/plantImage"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/flowerInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:text="Flower Info"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/plantImage" />
+
+    <TextView
+        android:id="@+id/foliageInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="10dp"
+        android:text="Foliage Info"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/plantImage"
+        app:layout_constraintTop_toBottomOf="@+id/plantImage" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

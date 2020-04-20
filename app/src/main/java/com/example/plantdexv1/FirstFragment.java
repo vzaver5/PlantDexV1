@@ -48,14 +48,13 @@ import androidx.navigation.fragment.NavHostFragment;
 public class FirstFragment extends Fragment{
     AutoCompleteTextView plantNameField;
     final String token = "T2F6bmtvTG8rSjBNcmhIVnBhUmVZQT09";
-    String plantName = "";
+    String plantName = null;
     String search = "plants/";
     String get_url="";
     HttpRequest retInfo = new HttpRequest();
     int pageNumber = 1;
     int maxPageNumber = -2;
-    //ListView listView;
-
+    ListView listView;
     //For thread
     private Handler uiUpdater = null;
     private static final String plantListKey = "plantListKey";
@@ -90,8 +89,8 @@ public class FirstFragment extends Fragment{
         //Handle information coming from the child thread
         //Child thread is the one handling the GET request
         if(uiUpdater == null) {
-            uiUpdater = new Handler()
-            {
+            System.out.println("uiUpdater is null");
+            uiUpdater = new Handler() {
                 @Override
                 public void handleMessage(Message msg) {
                     if(msg.what == REQUEST_CODE_SHOW_RESPONSE_TEXT)
@@ -100,7 +99,7 @@ public class FirstFragment extends Fragment{
                         if(bundle != null)
                         {
                             final String responseText = bundle.getString(plantListKey);
-                            System.out.println(responseText);
+                            System.out.println("Received from the HTTPReq:" + responseText);
                             //Array of string(com/sci/id) for adapter
                             String[] resultingList = parseJSONForPlantName(responseText,pageNumber);
 
@@ -109,12 +108,13 @@ public class FirstFragment extends Fragment{
                                 Toast.makeText(getContext(), "No matches to the search criterion", Toast.LENGTH_LONG).show();
                             }
 
-                            ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(),
+                            ArrayAdapter<String> adapter  = new ArrayAdapter<String>(getContext(),
                                     android.R.layout.simple_list_item_1, resultingList);
 
-                            ListView listView = (ListView) view.findViewById(R.id.listview);
+                            listView = (ListView) view.findViewById(R.id.listview);
                             listView.setAdapter(adapter);
-                            //listView.
+
+
                             System.out.println("Frag should be updated");
 
                             AdapterView.OnItemClickListener messageClickedHandler = new AdapterView.OnItemClickListener() {
@@ -192,7 +192,8 @@ public class FirstFragment extends Fragment{
     @Override
     public void onResume(){
         super.onResume();
-        ListView listView = (ListView) getView().findViewById(R.id.listview);
+        System.out.println("here");
+        listView = (ListView) getView().findViewById(R.id.listview);
     }
 
     //Method to hide the keyboard after a button is pressed
@@ -279,18 +280,7 @@ public class FirstFragment extends Fragment{
         startSendHttpRequestThread(get_url);    //Create child thread to do GET request
     }
 
-    //Purpose: When the user wants to look at a specific plant and get its info and display in readable fashion
-    static void JSONPlant(String jsonString){
-        Gson gson = new Gson();
-        Plants plants = gson.fromJson(jsonString, Plants.class);
-        System.out.println("Plant info:\n\tScientific Name: " + plants.scientific_name);
-        System.out.println("\tCommon Name: " + plants.common_name);
-        for(int i = 0; i < plants.images.length; i++){
-            System.out.println("\tImages link: " + plants.images[i].url);
-        }
-    }
-
-    //Purpose: Return a String[] to send to ListView
+    //Purpose: Return a String[] to send to ListView for display
     static String[] parseJSONForPlantName(String jsonString, int pageNumber){
         Gson gson= new Gson();
         JsonParser parser = new JsonParser();
@@ -299,26 +289,26 @@ public class FirstFragment extends Fragment{
         pageNumber = pageNumber -1;
 
         for(int i = 0; i < array.size(); i++){
+            //Receive each plant
             Plants plants = gson.fromJson(array.get(i), Plants.class);
-            if(plants.common_name == null){
-                returnArr[i] = "\n" + (30*pageNumber+i+1) + ". " + plants.scientific_name + " --> id: " + plants.id;
+            //Print sci name and common name of the plant
+            if(plants.getCommon_name() == null){
+                returnArr[i] = "\n" + (30*pageNumber+i+1) + ". " + plants.getScientific_name();
             }else{
-                returnArr[i] = "\n" + (30*pageNumber+i+1) + ". " + plants.common_name + "/" + plants.scientific_name + " --> id: " + plants.id;
+                returnArr[i] = "\n" + (30*pageNumber+i+1) + ". " + plants.getCommon_name() + "/" + plants.getScientific_name();
             }
         }
         //Return type for ArrayAdapter
         return returnArr;
-        //Want to make it so when they click the plant name they are redirected to the
-        //page that has com name, sci name, and image
     }
 
+    //Purpose: Method to return PlantId so that we can do direct look up when a plant is selected
     static int parseJSONForPlantId(String jsonString, int position){
         Gson gson= new Gson();
         JsonParser parser = new JsonParser();
         JsonArray array = parser.parse(jsonString).getAsJsonArray();
         Plants selectedPlant = gson.fromJson(array.get(position), Plants.class);
-        int plantId = selectedPlant.id;
-
+        int plantId = selectedPlant.getId();
         System.out.println("The plant's id is:" + plantId);
         return plantId;
     }
