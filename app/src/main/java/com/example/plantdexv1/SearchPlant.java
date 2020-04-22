@@ -42,11 +42,10 @@ public class SearchPlant extends Fragment {
     TextView fruitSeedColorTV;
     TextView fruitSeedConsTV;
     TextView fruitSeedSeedAbundanceTV;
-    TextView fruitSeedSeedPeriodBeginTV;
+    TextView fruitSeedSeedRangeTV;
     TextView fruitSeedSeedPeriodEndTV;
     TextView fruitSeedSeedPersistenceTV;
-    TextView growthPhMaxTV;
-    TextView growthPhMinTV;
+    TextView growthPhRangeTV;
     TextView precipMaxInchesTV;
     TextView precipMinInchesTV;
     TextView tempMinCTV;
@@ -120,16 +119,12 @@ public class SearchPlant extends Fragment {
                             fruitSeedColorTV = (TextView) getView().findViewById(R.id.fruitSeedColorFill);
                             fruitSeedConsTV = (TextView) getView().findViewById(R.id.fruitSeedConsFill);
                             fruitSeedSeedAbundanceTV = (TextView) getView().findViewById(R.id.fruitSeedSeedAbundanceFill);
-                            fruitSeedSeedPeriodBeginTV= (TextView) getView().findViewById(R.id.fruitSeedSeedPeriodBeginFill);
-                            fruitSeedSeedPeriodEndTV = (TextView) getView().findViewById(R.id.fruitSeedSeedPeriodEndFill);
+                            fruitSeedSeedRangeTV= (TextView) getView().findViewById(R.id.fruitSeedSeedRangeFill);
                             fruitSeedSeedPersistenceTV = (TextView) getView().findViewById(R.id.fruitSeedSeedPersistenceFill);
                             //Growth info
-                           growthPhMaxTV = (TextView) getView().findViewById(R.id.growthPhMaxFill);
-                           growthPhMinTV = (TextView) getView().findViewById(R.id.growthPhMinFill);
-                           precipMaxInchesTV = (TextView) getView().findViewById(R.id.precipMaxInchesFill);
-                           precipMinInchesTV = (TextView) getView().findViewById(R.id.precipMinInchesFill);
-                           tempMinCTV = (TextView) getView().findViewById(R.id.tempMinCFill);
-                           tempMinFTV = (TextView) getView().findViewById(R.id.tempMinFFill);
+                           growthPhRangeTV = (TextView) getView().findViewById(R.id.growthPhRangeFill);
+                           precipMaxInchesTV = (TextView) getView().findViewById(R.id.precipRangeFill);
+                           tempMinCTV = (TextView) getView().findViewById(R.id.tempMinCFFill);
                             //Specification info
                            speciGrowthFormTV = (TextView) getView().findViewById(R.id.specificationGrowthFormFill);
                            speciGrowthHabitTV = (TextView) getView().findViewById(R.id.specificationGrowthHabitFill);
@@ -199,71 +194,75 @@ public class SearchPlant extends Fragment {
                             }
 
                             //Assign Flower Color
-                            flowerColorTV.setText(plant.getMain_species().getFlower().getColor());
+                            //flowerColorTV.setText(plant.getMain_species().getFlower().getColor());
+                            flowerColorTV.append(plant.getMain_species().getFlower().getColor());
                             //Assign Flower Con
-                            flowerConsTV.setText(plant.getMain_species().getFlower().getConspicuous());
-
+                            if(plant.getMain_species().getFlower().getConspicuous().equals("true")){
+                                flowerConsTV.setText("Conspicuous");
+                            }else{
+                                flowerConsTV.setText("Not conspicuous");
+                            }
                             //Assign Foliage Color
-                            foliageColorTV.setText(plant.getMain_species().getFoliage().getColor());
+                            foliageColorTV.append(plant.getMain_species().getFoliage().getColor());
                             //Assign Foliage Porosity Summer
-                            foliagePorositySummerTV.setText(plant.getMain_species().getFoliage().getPorosity_summer());
+                            foliagePorositySummerTV.append(plant.getMain_species().getFoliage().getPorosity_summer());
                             //Assign Foliage Porosity Winter
-                            foliagePorosityWinterTV.setText(plant.getMain_species().getFoliage().getPorosity_winter());
+                            foliagePorosityWinterTV.append(plant.getMain_species().getFoliage().getPorosity_winter());
                             //Assign Foliage Texture
-                            foliageTextureTV.setText(plant.getMain_species().getFoliage().getTexture());
+                            foliageTextureTV.append(plant.getMain_species().getFoliage().getTexture());
 
                             //Assign FruitSeed Color
-                            fruitSeedColorTV.setText(plant.getMain_species().getFruit_or_seed().getColor());
+                            fruitSeedColorTV.append(plant.getMain_species().getFruit_or_seed().getColor());
                             //Assign FruitSeed Cons
-                            fruitSeedConsTV.setText(plant.getMain_species().getFruit_or_seed().getConspicuous());
+                            if(plant.getMain_species().getFruit_or_seed().getConspicuous().equals("true")){
+                                fruitSeedConsTV.setText("Conspicuous");
+                            }else{
+                                fruitSeedConsTV.setText("Not conspicuous");
+                            }
                             //Assign FruitSeed Seed Abundance
-                            fruitSeedSeedAbundanceTV.setText(plant.getMain_species().getFruit_or_seed().getSeed_abundance());
+                            fruitSeedSeedAbundanceTV.append(plant.getMain_species().getFruit_or_seed().getSeed_abundance());
                             //Assign FruitSeed Seed Period Begin
-                            fruitSeedSeedPeriodBeginTV.setText(plant.getMain_species().getFruit_or_seed().getSeed_period_begin());
-                            //Assign FruitSeed Seed Period End
-                            fruitSeedSeedPeriodEndTV.setText(plant.getMain_species().getFruit_or_seed().getSeed_period_end());
+                            fruitSeedSeedRangeTV.append(plant.getMain_species().getFruit_or_seed().getSeed_period_begin() + " to " +
+                                    plant.getMain_species().getFruit_or_seed().getSeed_period_end());
                             //Assign FruitSeed Seed Persistence
-                            fruitSeedSeedPersistenceTV.setText(plant.getMain_species().getFruit_or_seed().getSeed_persistence());
+                            fruitSeedSeedPersistenceTV.append(plant.getMain_species().getFruit_or_seed().getSeed_persistence());
 
-
-                            //Assign Growth PH Max
-                            growthPhMaxTV.setText(plant.getMain_species().getGrowth().getPh_maximum() + "");
-                            //Assign Growth PH Min
-                            growthPhMinTV.setText(plant.getMain_species().getGrowth().getPh_minimum() + "");
-                            //Assign Precipitation Max Inches
-                            precipMaxInchesTV.setText(plant.getMain_species().getGrowth().getPrecipitation_maximum().getInches() + "");
-                            //Assign Precipitation Min Inches
-                            precipMinInchesTV.setText(plant.getMain_species().getGrowth().getPrecipitation_minimum().getInches() + "");
-                            //Assign Temp Min Celsius
-                            tempMinCTV.setText(plant.getMain_species().getGrowth().getTemperature_minimum().getDeg_c() + "");
-                            //Assign Temp Min Fahr
-                            tempMinFTV.setText(plant.getMain_species().getGrowth().getTemperature_minimum().getDeg_f() + "");
+                            //Assign Growth PH Range
+                            growthPhRangeTV.append(plant.getMain_species().getGrowth().getPh_minimum() + " to " +
+                                    plant.getMain_species().getGrowth().getPh_maximum() + "");
+                            //Assign Precipitation Range Inches
+                            precipMaxInchesTV.append(plant.getMain_species().getGrowth().getPrecipitation_minimum().getInches() + " to " +
+                                    plant.getMain_species().getGrowth().getPrecipitation_maximum().getInches() + "");
+                            //Assign Temp Min C and F
+                            tempMinCTV.append(plant.getMain_species().getGrowth().getTemperature_minimum().getDeg_c() + "C / " +
+                                    plant.getMain_species().getGrowth().getTemperature_minimum().getDeg_f() + "F");
 
                             //Assign Specification Growth Form
                             String b = plant.getMain_species().getSpecifications().getGrowth_form();
-                            speciGrowthFormTV.setText(plant.getMain_species().getSpecifications().getGrowth_form());
+                            speciGrowthFormTV.append(plant.getMain_species().getSpecifications().getGrowth_form());
                             //Assign Specification Growth Habit
                             String b1 = plant.getMain_species().getSpecifications().getGrowth_habit();
-                            speciGrowthHabitTV.setText(plant.getMain_species().getSpecifications().getGrowth_habit());
+                            speciGrowthHabitTV.append(plant.getMain_species().getSpecifications().getGrowth_habit());
                             //Assign Specification Growth Rate
                             String b2 = plant.getMain_species().getSpecifications().getGrowth_rate();
-                            speciGrowthRateTV.setText(plant.getMain_species().getSpecifications().getGrowth_rate());
+                            speciGrowthRateTV.append(plant.getMain_species().getSpecifications().getGrowth_rate());
                             //Assign Specification Shape Ori
                             String b3 = plant.getMain_species().getSpecifications().getShape_and_orientation();
-                            speciGrowthShapeTV.setText(plant.getMain_species().getSpecifications().getShape_and_orientation());
+                            speciGrowthShapeTV.append(plant.getMain_species().getSpecifications().getShape_and_orientation());
 
                             //Assign Seed Bloom Period
                             String a = plant.getMain_species().getSeed().getBloom_period();
-                            seedBloomPeriodTV.setText(plant.getMain_species().getSeed().getBloom_period());
+                            seedBloomPeriodTV.append(plant.getMain_species().getSeed().getBloom_period());
                             //Assign Seed Commercially Available
                             String a1 = plant.getMain_species().getSeed().getCommercial_availability();
-                            seedCommAvTV.setText(plant.getMain_species().getSeed().getCommercial_availability());
+                            seedCommAvTV.append(plant.getMain_species().getSeed().getCommercial_availability());
                             //Assign Seed Spread Rate
                             String a2 = plant.getMain_species().getSeed().getSeed_spread_rate();
-                            seedSeedSpreadRateTV.setText(plant.getMain_species().getSeed().getSeed_spread_rate());
+                            seedSeedSpreadRateTV.append(plant.getMain_species().getSeed().getSeed_spread_rate());
                             //Assign Seeds Per Pound
                             String a3 =plant.getMain_species().getSeed().getSeeds_per_pound() + "";
-                            seedSeedPerPoundTV.setText(plant.getMain_species().getSeed().getSeeds_per_pound() + "");
+                            seedSeedPerPoundTV.append(plant.getMain_species().getSeed().getSeeds_per_pound() + "");
+                            /*
                             System.out.println(a);
                             System.out.println(a1);
                             System.out.println(a2);
@@ -272,6 +271,7 @@ public class SearchPlant extends Fragment {
                             System.out.println(b1);
                             System.out.println(b2);
                             System.out.println(b3);
+                                                        */
 
                         }
                     }
