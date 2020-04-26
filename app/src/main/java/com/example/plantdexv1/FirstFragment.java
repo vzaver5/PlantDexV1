@@ -1,6 +1,7 @@
 package com.example.plantdexv1;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
@@ -13,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -86,6 +88,10 @@ public class FirstFragment extends Fragment{
         //Retrieve the plant name that was searched
         plantNameField = view.findViewById(R.id.search_field);
 
+        //Hide the previous and next buttons
+        view.findViewById(R.id.prev_in_list).setVisibility(View.GONE);
+        view.findViewById(R.id.next_in_list).setVisibility(View.GONE);
+
         //Handle information coming from the child thread
         //Child thread is the one handling the GET request
         if(uiUpdater == null) {
@@ -107,6 +113,12 @@ public class FirstFragment extends Fragment{
                             if(resultingList.length == 0){
                                 Toast.makeText(getContext(), "No matches to the search criterion", Toast.LENGTH_LONG).show();
                             }
+                            if(resultingList.length == 30){
+                                //Previous and next buttons appear
+                                view.findViewById(R.id.prev_in_list).setVisibility(View.VISIBLE);
+                                view.findViewById(R.id.next_in_list).setVisibility(View.VISIBLE);
+                            }
+
 
                             ArrayAdapter<String> adapter  = new ArrayAdapter<String>(getContext(),
                                     android.R.layout.simple_list_item_1, resultingList);
@@ -139,10 +151,9 @@ public class FirstFragment extends Fragment{
         view.findViewById(R.id.search_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Below two statements should hide keyboard when search is clicked....
-                //Doesnt work
-                //AutoCompleteTextView field = getView().findViewById(R.id.search_field);
-                //field.onEditorAction(EditorInfo.IME_ACTION_DONE);
+                //Hide keyboard
+                InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Activity.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
 
                 //Get plant name and format it
                 plantName = plantNameField.getText().toString();
@@ -194,12 +205,6 @@ public class FirstFragment extends Fragment{
         super.onResume();
         System.out.println("here");
         listView = (ListView) getView().findViewById(R.id.listview);
-    }
-
-    //Method to hide the keyboard after a button is pressed
-    public void hideKeyboard(View view) {
-        AutoCompleteTextView field = getView().findViewById(R.id.search_field);
-        field.onEditorAction(EditorInfo.IME_ACTION_DONE);
     }
 
     // Start a thread to send http request to web server use HttpURLConnection object.

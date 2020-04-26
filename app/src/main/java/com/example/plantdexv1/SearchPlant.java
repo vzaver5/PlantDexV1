@@ -1,12 +1,16 @@
 package com.example.plantdexv1;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -66,12 +70,10 @@ public class SearchPlant extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        System.out.println("view created");
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.activity_result_from_search, container, false);
     }
@@ -81,6 +83,7 @@ public class SearchPlant extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         Bundle bundle = getArguments();
         int selectedPlantId = bundle.getInt("plantId");
+
 
         if(uiUpdater == null) {
             uiUpdater = new Handler()
@@ -391,6 +394,5 @@ public class SearchPlant extends Fragment {
         }
         return response;
     }
-
 
 }

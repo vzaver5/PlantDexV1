@@ -3,7 +3,37 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/login">
+
+    <fragment
+        android:id="@+id/login"
+        android:name="com.example.plantdexv1.login"
+        android:label="@string/login_label"
+        tools:layout="@layout/activity_login"
+        >
+        <action
+        android:id="@+id/loginFragment_to_FirstFragment"
+        app:destination="@id/FirstFragment"/>
+        >
+
+        <action
+            android:id="@+id/loginFragment_to_RegisterFragment"
+            app:destination="@id/RegisterFragment"/>
+        >
+    </fragment>
+
+    <fragment
+        android:id="@+id/RegisterFragment"
+        android:name="com.example.plantdexv1.RegisterActivity"
+        android:label="@string/register_label"
+        tools:layout="@layout/activity_register"
+        >
+        <action
+            android:id="@+id/registerFragment_to_loginFragment"
+            app:destination="@id/login"/>
+        >
+    </fragment>
+
 
     <fragment
         android:id="@+id/FirstFragment"

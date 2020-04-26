@@ -12,4 +12,6 @@
     <string name="search">Search</string>
     <string name="SearchPlant_fragment_label">SearchPlant_fragment_label</string>
     <string name="MatchedListFragment">MatchedListFragment</string>
+    <string name="login_label">login</string>
+    <string name="register_label">registerfragment</string>
 </resources>

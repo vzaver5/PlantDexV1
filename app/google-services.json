@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "245001251927",
+    "firebase_url": "https://plantdex-f014f.firebaseio.com",
+    "project_id": "plantdex-f014f",
+    "storage_bucket": "plantdex-f014f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:245001251927:android:f61c03e3159309bc518712",
+        "android_client_info": {
+          "package_name": "com.example.plantdexv1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "245001251927-hbcgn240o1o58kavhool0jm9u9otd0a2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAL_RNLzHn054_34j6YaQGiECZam6AIlxA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "245001251927-hbcgn240o1o58kavhool0jm9u9otd0a2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

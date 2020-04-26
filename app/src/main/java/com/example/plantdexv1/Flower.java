@@ -11,7 +11,12 @@ class Flower {
 
     //Getters
     public String getColor() {
-        return color;
+        if(color != null){
+            return color;
+        }else{
+            return color = "NoInfo";
+        }
+
     }
 
     public String getConspicuous() {
