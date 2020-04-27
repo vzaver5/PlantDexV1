@@ -1,14 +1,14 @@
 package com.example.plantdexv1;
 
 class PrecipitationMin {
-    float inches;
+    Float inches;
 
-    public PrecipitationMin(float inches) {
+    public PrecipitationMin(Float inches) {
         this.inches = inches;
     }
 
     //Getter
-    public float getInches() {
+    public Float getInches() {
         return inches;
     }
 }

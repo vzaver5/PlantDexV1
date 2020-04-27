@@ -1,13 +1,13 @@
 package com.example.plantdexv1;
 
 class PrecipitationMax {
-    float inches;
+    Float inches;
 
-    public PrecipitationMax(float inches) {
+    public PrecipitationMax(Float inches) {
         this.inches = inches;
     }
     //Getter
-    public float getInches() {
+    public Float getInches() {
         return inches;
     }
 

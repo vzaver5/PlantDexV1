@@ -1,13 +1,13 @@
 package com.example.plantdexv1;
 
 class Growth {
-    float ph_maximum;
-    float ph_minimum;
+    Float ph_maximum;
+    Float ph_minimum;
     PrecipitationMax precipitation_maximum;
     PrecipitationMin precipitation_minimum;
     TemperatureMin temperature_minimum;
 
-    public Growth(float ph_maximum, float ph_minimum, PrecipitationMax precipitation_maximum, PrecipitationMin precipitation_minimum, TemperatureMin temperature_minimum) {
+    public Growth(Float ph_maximum, Float ph_minimum, PrecipitationMax precipitation_maximum, PrecipitationMin precipitation_minimum, TemperatureMin temperature_minimum) {
         this.ph_maximum = ph_maximum;
         this.ph_minimum = ph_minimum;
         this.precipitation_maximum = precipitation_maximum;
@@ -16,11 +16,11 @@ class Growth {
     }
 
     //Getters
-    public float getPh_maximum() {
+    public Float getPh_maximum() {
         return ph_maximum;
     }
 
-    public float getPh_minimum() {
+    public Float getPh_minimum() {
         return ph_minimum;
     }
 

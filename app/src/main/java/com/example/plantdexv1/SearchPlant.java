@@ -103,7 +103,9 @@ public class SearchPlant extends Fragment {
                             Plants plant = gson.fromJson(responseText, Plants.class);
                             System.out.println("Response: "+responseText);
                             String complete_data = plant.getMain_species().getComplete_data();
-                            if(complete_data.equals("true")){
+                            if(complete_data == null){
+                                System.out.println("---------- We do not have complete data on the plant");
+                            }else if(complete_data.equals("true")){
                                 System.out.println("---------- We have complete data on the plant");
                             }
 
@@ -197,74 +199,169 @@ public class SearchPlant extends Fragment {
                             }
 
                             //Assign Flower Color
-                            //flowerColorTV.setText(plant.getMain_species().getFlower().getColor());
-                            flowerColorTV.append(plant.getMain_species().getFlower().getColor());
+                            if(plant.getMain_species().getFlower().getColor() != null){
+                                flowerColorTV.append(plant.getMain_species().getFlower().getColor());
+                            }else{
+                                flowerColorTV.append("No info");
+                            }
+
                             //Assign Flower Con
-                            if(plant.getMain_species().getFlower().getConspicuous().equals("true")){
+                            if(plant.getMain_species().getFlower().getConspicuous() == null){
+                                flowerConsTV.setText("Unknown");
+
+                            }else if(plant.getMain_species().getFlower().getConspicuous().equals("true")){
                                 flowerConsTV.setText("Conspicuous");
                             }else{
-                                flowerConsTV.setText("Not conspicuous");
+                                flowerConsTV.setText("Not Conspicuous");
                             }
                             //Assign Foliage Color
-                            foliageColorTV.append(plant.getMain_species().getFoliage().getColor());
+                            if(plant.getMain_species().getFoliage().getColor() != null){
+                                foliageColorTV.append(plant.getMain_species().getFoliage().getColor());
+                            }else{
+                                foliageColorTV.append("No info");
+                            }
                             //Assign Foliage Porosity Summer
-                            foliagePorositySummerTV.append(plant.getMain_species().getFoliage().getPorosity_summer());
+                            if(plant.getMain_species().getFoliage().getPorosity_summer() != null){
+                                foliagePorositySummerTV.append(plant.getMain_species().getFoliage().getPorosity_summer());
+                            }else{
+                                foliagePorositySummerTV.append("No info");
+                            }
                             //Assign Foliage Porosity Winter
-                            foliagePorosityWinterTV.append(plant.getMain_species().getFoliage().getPorosity_winter());
+                            if(plant.getMain_species().getFoliage().getPorosity_winter() != null){
+                                foliagePorosityWinterTV.append(plant.getMain_species().getFoliage().getPorosity_winter());
+                            }else{
+                                foliagePorosityWinterTV.append("No info");
+                            }
+
                             //Assign Foliage Texture
-                            foliageTextureTV.append(plant.getMain_species().getFoliage().getTexture());
+                            if(plant.getMain_species().getFoliage().getTexture() != null){
+                                foliageTextureTV.append(plant.getMain_species().getFoliage().getTexture());
+                            }else{
+                            foliageTextureTV.append("No info");
+                            }
+
 
                             //Assign FruitSeed Color
-                            fruitSeedColorTV.append(plant.getMain_species().getFruit_or_seed().getColor());
+                            if(plant.getMain_species().getFruit_or_seed().getColor() != null){
+                                fruitSeedColorTV.append(plant.getMain_species().getFruit_or_seed().getColor());
+                            }else{
+                                fruitSeedColorTV.append("No info");
+                            }
                             //Assign FruitSeed Cons
-                            if(plant.getMain_species().getFruit_or_seed().getConspicuous().equals("true")){
+                            if(plant.getMain_species().getFruit_or_seed().getConspicuous() == null){
+                                fruitSeedConsTV.setText("Unknown");
+                            } else if(plant.getMain_species().getFruit_or_seed().getConspicuous().equals("true")){
                                 fruitSeedConsTV.setText("Conspicuous");
                             }else{
                                 fruitSeedConsTV.setText("Not conspicuous");
                             }
                             //Assign FruitSeed Seed Abundance
-                            fruitSeedSeedAbundanceTV.append(plant.getMain_species().getFruit_or_seed().getSeed_abundance());
+                            if(plant.getMain_species().getFruit_or_seed().getSeed_abundance() != null){
+                                fruitSeedSeedAbundanceTV.append(plant.getMain_species().getFruit_or_seed().getSeed_abundance());
+                            }else{
+                                fruitSeedSeedAbundanceTV.append("No info");
+                            }
                             //Assign FruitSeed Seed Period Begin
-                            fruitSeedSeedRangeTV.append(plant.getMain_species().getFruit_or_seed().getSeed_period_begin() + " to " +
+                            if(plant.getMain_species().getFruit_or_seed().getSeed_period_begin() != null
+                                && plant.getMain_species().getFruit_or_seed().getSeed_period_end() != null){
+                                    fruitSeedSeedRangeTV.append(plant.getMain_species().getFruit_or_seed().getSeed_period_begin() + " to " +
                                     plant.getMain_species().getFruit_or_seed().getSeed_period_end());
+                            }else{
+                                fruitSeedSeedRangeTV.append("No info");
+                            }
                             //Assign FruitSeed Seed Persistence
-                            fruitSeedSeedPersistenceTV.append(plant.getMain_species().getFruit_or_seed().getSeed_persistence());
+                            if(plant.getMain_species().getFruit_or_seed().getSeed_persistence() != null){
+                                fruitSeedSeedPersistenceTV.append(plant.getMain_species().getFruit_or_seed().getSeed_persistence());
+                            }else{
+                                fruitSeedSeedPersistenceTV.append("No info");
+                            }
+
 
                             //Assign Growth PH Range
-                            growthPhRangeTV.append(plant.getMain_species().getGrowth().getPh_minimum() + " to " +
+                            if(plant.getMain_species().getGrowth().getPh_minimum() != null ||
+                                    plant.getMain_species().getGrowth().getPh_maximum() != null){
+                                growthPhRangeTV.append(plant.getMain_species().getGrowth().getPh_minimum() + " to " +
                                     plant.getMain_species().getGrowth().getPh_maximum() + "");
+                            }else{
+                                growthPhRangeTV.append("No info");
+                            }
+
                             //Assign Precipitation Range Inches
-                            precipMaxInchesTV.append(plant.getMain_species().getGrowth().getPrecipitation_minimum().getInches() + " to " +
+                            if(plant.getMain_species().getGrowth().getPrecipitation_minimum().getInches() != null ||
+                                    plant.getMain_species().getGrowth().getPrecipitation_maximum().getInches() != null){
+                                precipMaxInchesTV.append(plant.getMain_species().getGrowth().getPrecipitation_minimum().getInches() + " to " +
                                     plant.getMain_species().getGrowth().getPrecipitation_maximum().getInches() + "");
+                            }else{
+                                precipMaxInchesTV.append("No info");
+                            }
+
                             //Assign Temp Min C and F
-                            tempMinCTV.append(plant.getMain_species().getGrowth().getTemperature_minimum().getDeg_c() + "C / " +
+                            if(plant.getMain_species().getGrowth().getTemperature_minimum().getDeg_c() != null ||
+                                    plant.getMain_species().getGrowth().getTemperature_minimum().getDeg_f() != null){
+                                tempMinCTV.append(plant.getMain_species().getGrowth().getTemperature_minimum().getDeg_c() + "C / " +
                                     plant.getMain_species().getGrowth().getTemperature_minimum().getDeg_f() + "F");
+                            }else{
+                                tempMinCTV.append("No info");
+                            }
 
                             //Assign Specification Growth Form
+                            if(plant.getMain_species().getSpecifications().getGrowth_form() != null){
+                                speciGrowthFormTV.append(plant.getMain_species().getSpecifications().getGrowth_form());
+                            }else{
+                                speciGrowthFormTV.append("No info");
+                            }
                             String b = plant.getMain_species().getSpecifications().getGrowth_form();
-                            speciGrowthFormTV.append(plant.getMain_species().getSpecifications().getGrowth_form());
                             //Assign Specification Growth Habit
+                            if(plant.getMain_species().getSpecifications().getGrowth_habit() != null){
+                                speciGrowthHabitTV.append(plant.getMain_species().getSpecifications().getGrowth_habit());
+                            }else{
+                                speciGrowthHabitTV.append("No info");
+                            }
                             String b1 = plant.getMain_species().getSpecifications().getGrowth_habit();
-                            speciGrowthHabitTV.append(plant.getMain_species().getSpecifications().getGrowth_habit());
                             //Assign Specification Growth Rate
+                            if(plant.getMain_species().getSpecifications().getGrowth_rate() != null){
+                                speciGrowthRateTV.append(plant.getMain_species().getSpecifications().getGrowth_rate());
+                            }else{
+                                speciGrowthRateTV.append("No info");
+                            }
                             String b2 = plant.getMain_species().getSpecifications().getGrowth_rate();
-                            speciGrowthRateTV.append(plant.getMain_species().getSpecifications().getGrowth_rate());
                             //Assign Specification Shape Ori
+                            if(plant.getMain_species().getSpecifications().getShape_and_orientation() != null){
+                                speciGrowthShapeTV.append(plant.getMain_species().getSpecifications().getShape_and_orientation());
+                            }else{
+                                speciGrowthShapeTV.append("No info");
+                            }
                             String b3 = plant.getMain_species().getSpecifications().getShape_and_orientation();
-                            speciGrowthShapeTV.append(plant.getMain_species().getSpecifications().getShape_and_orientation());
 
                             //Assign Seed Bloom Period
+                            if(plant.getMain_species().getSeed().getBloom_period() != null){
+                                seedBloomPeriodTV.append(plant.getMain_species().getSeed().getBloom_period());
+                            }else{
+                                seedBloomPeriodTV.append("No info");
+                            }
                             String a = plant.getMain_species().getSeed().getBloom_period();
-                            seedBloomPeriodTV.append(plant.getMain_species().getSeed().getBloom_period());
                             //Assign Seed Commercially Available
+                            if(plant.getMain_species().getSeed().getCommercial_availability() != null){
+                                seedCommAvTV.append(plant.getMain_species().getSeed().getCommercial_availability());
+                            }else{
+                                seedCommAvTV.append("No info");
+                            }
                             String a1 = plant.getMain_species().getSeed().getCommercial_availability();
-                            seedCommAvTV.append(plant.getMain_species().getSeed().getCommercial_availability());
                             //Assign Seed Spread Rate
+                            if(plant.getMain_species().getSeed().getSeed_spread_rate() != null){
+                                seedSeedSpreadRateTV.append(plant.getMain_species().getSeed().getSeed_spread_rate());
+                            }else{
+                                seedSeedSpreadRateTV.append("No info");
+                            }
                             String a2 = plant.getMain_species().getSeed().getSeed_spread_rate();
-                            seedSeedSpreadRateTV.append(plant.getMain_species().getSeed().getSeed_spread_rate());
+
                             //Assign Seeds Per Pound
+                            if(plant.getMain_species().getSeed().getSeeds_per_pound() != null){
+                                seedSeedPerPoundTV.append(plant.getMain_species().getSeed().getSeeds_per_pound() + "");
+                            }else{
+                                seedSeedPerPoundTV.append("No info");
+                            }
                             String a3 =plant.getMain_species().getSeed().getSeeds_per_pound() + "";
-                            seedSeedPerPoundTV.append(plant.getMain_species().getSeed().getSeeds_per_pound() + "");
                             /*
                             System.out.println(a);
                             System.out.println(a1);
