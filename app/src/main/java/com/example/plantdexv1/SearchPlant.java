@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -18,7 +21,16 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
@@ -28,6 +40,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Vector;
 
 public class SearchPlant extends Fragment {
     String get_url = "";
@@ -35,6 +48,12 @@ public class SearchPlant extends Fragment {
     private static final int REQUEST_CODE_SHOW_RESPONSE_TEXT = 1;
     private Handler uiUpdater = null;
     private static final String plantInfoKey = "plantInfoKey";
+    private DatabaseReference userDb;
+    String comName;
+    String sciName;
+    User user;
+
+    //Views
     TextView sciTextView;
     TextView comTextView;
     TextView flowerColorTV;
@@ -70,6 +89,10 @@ public class SearchPlant extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        userDb = FirebaseDatabase.getInstance().getReference().child("user:" + userId);
+        //userDb = FirebaseDatabase.getInstance().getReference().child("user:" + userId).child(FirebaseAuth.getInstance().getCurrentUser().getUid());
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -77,7 +100,28 @@ public class SearchPlant extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.activity_result_from_search, container, false);
     }
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_main, menu);
+        super.onCreateOptionsMenu(menu,inflater);
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.Profile) {
+            System.out.println("SearchPlant to Profile selected");
+            NavHostFragment.findNavController(SearchPlant.this)
+                    .navigate(R.id.specific_fragment_to_profile_fragment);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
     @SuppressLint("HandlerLeak")
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -146,7 +190,7 @@ public class SearchPlant extends Fragment {
                             addToGarden = (Button) getView().findViewById(R.id.addToGarden);
 
                             //Assign Scientific Name
-                            String sciName = parseJsonSciName(plant);
+                            sciName = parseJsonSciName(plant);
                             if(sciName != ""){
                                 sciTextView.setText(sciName);
                             }else{
@@ -154,7 +198,7 @@ public class SearchPlant extends Fragment {
                             }
 
                             //Assign Common Name
-                            String comName = parseJsonComName(plant);
+                            comName = parseJsonComName(plant);
                             if(comName != ""){
                                 //insert into fill
                                 comTextView.setText(comName);
@@ -163,13 +207,31 @@ public class SearchPlant extends Fragment {
                             }
 
                             //Assign function addToGarden to the Add To Garden button
+                            //Add plant to userDb
                             addToGarden.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    System.out.println("You added to garden");
+                                    //Get the current user info from db
+                                    //updateUserInfo();
+                                    if(!comName.equals("")){
+                                        System.out.println("Common name available");
+                                        String pn = comName + " , " + sciName;
+                                        userDb.child("virtualGarden").child(pn).setValue(true);     //add to user db
+                                    }else{
+                                        System.out.println("Common name not available");
+                                        String pn = sciName;
+                                        userDb.child("virtualGarden").child(pn).setValue(true);     //add to user db
+                                    }
                                     Toast.makeText(getContext(), "Added to your Garden!", Toast.LENGTH_SHORT).show();
                                 }
                             });
+                            //TODO
+                            //If the plant is already in your virtual Garden db
+                            //Then the "Add To Garden Button" should say "Added to Garden"
+                                //Idea: When loading the page
+                                    //Read from userDb and check if plant is child of Virtual Garden
+                                    //If yes : "Added to Garden"
+                                    //If no  : "Add to Garden"
 
                             //Assign pictures
                             final String[] plantUrls = parseJsonPlantPic(plant);
@@ -492,4 +554,33 @@ public class SearchPlant extends Fragment {
         return response;
     }
 
+    public void updateUserInfo(){
+        System.out.println("Retrieving the vG info");
+        userDb.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String prevChildKey) {
+                //Im not entering here anymore
+                System.out.println("-------- I AM IN UPDATE USER INFO");
+                for(DataSnapshot ds : dataSnapshot.getChildren()) {
+                    String friend = ds.getKey();
+                    user.addToVirtualGarden(friend);    //add to the user object's virtual garden
+                }
+                //System.out.println(user.getName());
+                //System.out.println(user.getUserId());
+            }
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String prevChildKey) {}
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {}
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String prevChildKey) {}
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {}
+        });
+    }
+
 }
+

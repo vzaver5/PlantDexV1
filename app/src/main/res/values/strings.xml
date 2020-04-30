@@ -14,4 +14,5 @@
     <string name="MatchedListFragment">MatchedListFragment</string>
     <string name="login_label">login</string>
     <string name="register_label">registerfragment</string>
+    <string name="Profile">Profile</string>
 </resources>

@@ -16,12 +16,15 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class RegisterActivity extends AppCompatActivity {
     private static final String TAG = "EmailPassword";
     private FirebaseAuth mAuth;
     String password;
     String password2;
+    AutoCompleteTextView nameTextView;
     AutoCompleteTextView usernameTextView;
     EditText passwordTextView;
     EditText passwordTextView2;
@@ -36,6 +39,7 @@ public class RegisterActivity extends AppCompatActivity {
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
 
+        nameTextView = findViewById(R.id.nameRegisterFragment);
         usernameTextView = findViewById(R.id.usernameRegisterFragment);
         passwordTextView = findViewById(R.id.passwordRegisterFragment);
         passwordTextView2 = findViewById(R.id.password2RegisterFragment2);
@@ -45,6 +49,8 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View view) {
                 System.out.println("Register button selected");
                 //Determine if they gave valid credentials to make an acct
+                //Get name
+                String name = nameTextView.getText().toString();
                 //Get username
                 String username = usernameTextView.getText().toString();
                 System.out.println(username);
@@ -64,7 +70,7 @@ public class RegisterActivity extends AppCompatActivity {
                         if(password.equals(password2)){
                             //Passwords match each other
                             //We can now create the account
-                            createAccount(username, password);
+                            createAccount(name, username, password);
                         }else{//Pass don't match
                             Toast.makeText(RegisterActivity.this, "Passwords do not match", Toast.LENGTH_LONG).show();
                         }
@@ -92,7 +98,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
 
-    public void createAccount(String email, String password){
+    public void createAccount(final String name, String email, String password){
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -102,6 +108,14 @@ public class RegisterActivity extends AppCompatActivity {
                             Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             Toast.makeText(RegisterActivity.this, "Account has been registered", Toast.LENGTH_LONG).show();
+
+                            //Add the user to the database
+                            String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                            User registeredUser = new User(name,userId); //Create user object
+                            DatabaseReference mDB =  FirebaseDatabase.getInstance().getReference();
+                            mDB.child("user:" + userId).child("name").setValue(registeredUser.getName());   //Add userobject to user:userid path
+                            mDB.child("user:" + userId).child("virtualGarden").child("testPlant").setValue(true);   //Add userobject to user:userid path
+
                             finish();   //End register activity return back to login
                             //updateUI(user);
                         } else {

@@ -45,6 +45,24 @@
             android:id="@+id/firstFragment_to_specificFragment"
             app:destination="@id/SpecifiedPlantFragment"/>
 
+        <action
+            android:id="@+id/firstFragment_to_profile_fragment"
+            app:destination="@id/ProfileFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/ProfileFragment"
+        android:name="com.example.plantdexv1.ProfileFragment"
+        android:label="profile_fragment_label"
+        tools:layout="@layout/fragment_profile">
+
+        <action
+            android:id="@+id/profile_fragment_to_first_fragment"
+            app:destination="@id/FirstFragment"/>
+        <action
+            android:id="@+id/profile_fragment_to_specific_fragment"
+            app:destination="@id/SpecifiedPlantFragment"/>
+
     </fragment>
 
     <fragment
@@ -53,6 +71,9 @@
         android:label="@string/second_fragment_label"
         tools:layout="@layout/activity_result_from_search">
 
+        <action
+            android:id="@+id/specific_fragment_to_profile_fragment"
+            app:destination="@id/ProfileFragment"/>
         <!--
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
