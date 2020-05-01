@@ -1,5 +1,6 @@
 package com.example.plantdexv1;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -16,6 +17,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -108,13 +110,26 @@ public class RegisterActivity extends AppCompatActivity {
                             Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             Toast.makeText(RegisterActivity.this, "Account has been registered", Toast.LENGTH_LONG).show();
+                            //Assign name
+                            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                    .setDisplayName(name).build();
 
+                            user.updateProfile(profileUpdates)
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                                Log.d(TAG, "User name set");
+                                            }
+                                        }
+                                    });
                             //Add the user to the database
                             String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
                             User registeredUser = new User(name,userId); //Create user object
                             DatabaseReference mDB =  FirebaseDatabase.getInstance().getReference();
                             mDB.child("user:" + userId).child("name").setValue(registeredUser.getName());   //Add userobject to user:userid path
-                            mDB.child("user:" + userId).child("virtualGarden").child("testPlant").setValue(true);   //Add userobject to user:userid path
+                            //Testing
+                            //mDB.child("user:" + userId).child("virtualGarden").child("testPlant").setValue(true);   //Add userobject to user:userid path
 
                             finish();   //End register activity return back to login
                             //updateUI(user);
