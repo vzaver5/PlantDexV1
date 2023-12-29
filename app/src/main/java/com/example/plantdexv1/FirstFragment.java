@@ -30,6 +30,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import org.w3c.dom.Text;
@@ -41,6 +42,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.concurrent.ExecutionException;
 
@@ -56,9 +58,9 @@ import androidx.navigation.fragment.NavHostFragment;
 
 public class FirstFragment extends Fragment{
     AutoCompleteTextView plantNameField;
-    final String token = "T2F6bmtvTG8rSjBNcmhIVnBhUmVZQT09";
+    final String token = "r9Ft9FXCoFva7YmQ1W93N5J8wRck-fgxJnUyFZXV15k";
     String plantName = null;
-    String search = "plants/";
+    String search = "plants/search";
     String get_url="";
     HttpRequest retInfo = new HttpRequest();
     int pageNumber = 1;
@@ -142,7 +144,7 @@ public class FirstFragment extends Fragment{
                             if(resultingList.length == 0){
                                 Toast.makeText(getContext(), "No matches to the search criterion", Toast.LENGTH_LONG).show();
                             }
-                            if(resultingList.length == 30){
+                            if(resultingList.length == 20){
                                 //Previous and next buttons appear
                                 view.findViewById(R.id.prev_in_list).setVisibility(View.VISIBLE);
                                 view.findViewById(R.id.next_in_list).setVisibility(View.VISIBLE);
@@ -309,39 +311,40 @@ public class FirstFragment extends Fragment{
 
     private void searchPlantName(String plantName){
         System.out.println("----------Searched for: "+ plantName);
-        get_url = "https://trefle.io/api/"+ search +"?token="+token+"&q="+plantName+"&page=" + pageNumber;
+        get_url = "https://trefle.io/api/v1/"+ search +"?token="+token+"&q="+plantName+"&page=" + pageNumber;
         System.out.println(get_url);
         startSendHttpRequestThread(get_url);    //Create child thread to do GET request
     }
 
     //Purpose: Return a String[] to send to ListView for display
     static String[] parseJSONForPlantName(String jsonString, int pageNumber){
+        pageNumber = pageNumber-1;
         Gson gson= new Gson();
-        JsonParser parser = new JsonParser();
-        JsonArray array = parser.parse(jsonString).getAsJsonArray();
-        String[] returnArr = new String[array.size()];
-        pageNumber = pageNumber -1;
+        JsonObject jsonObject = JsonParser.parseString(jsonString).getAsJsonObject();
+        JsonArray jsonArray = jsonObject.getAsJsonArray("data");
+        String[] returnArr = new String[jsonArray.size()];
 
-        for(int i = 0; i < array.size(); i++){
+        for (int i = 0; i < jsonArray.size(); i++) {
             //Receive each plant
-            Plants plants = gson.fromJson(array.get(i), Plants.class);
+            Plants plants = gson.fromJson(jsonArray.get(i), Plants.class);
             //Print sci name and common name of the plant
             if(plants.getCommon_name() == null){
-                returnArr[i] = "\n" + (30*pageNumber+i+1) + ". " + plants.getScientific_name();
+                returnArr[i] = "\n" + (20*pageNumber+i+1) + ". " + plants.getScientific_name();
             }else{
-                returnArr[i] = "\n" + (30*pageNumber+i+1) + ". " + plants.getCommon_name() + "/" + plants.getScientific_name();
+                returnArr[i] = "\n" + (20*pageNumber+i+1) + ". " + plants.getCommon_name() + "/" + plants.getScientific_name();
             }
         }
-        //Return type for ArrayAdapter
         return returnArr;
     }
 
     //Purpose: Method to return PlantId so that we can do direct look up when a plant is selected
     static int parseJSONForPlantId(String jsonString, int position){
         Gson gson= new Gson();
-        JsonParser parser = new JsonParser();
-        JsonArray array = parser.parse(jsonString).getAsJsonArray();
-        Plants selectedPlant = gson.fromJson(array.get(position), Plants.class);
+        JsonObject jsonObject = JsonParser.parseString(jsonString).getAsJsonObject();
+        JsonArray jsonArray = jsonObject.getAsJsonArray("data");
+        //JsonParser parser = new JsonParser();
+        //JsonArray array = parser.parse(jsonString).getAsJsonArray();
+        Plants selectedPlant = gson.fromJson(jsonArray.get(position), Plants.class);
         int plantId = selectedPlant.getId();
         System.out.println("The plant's id is:" + plantId);
         return plantId;

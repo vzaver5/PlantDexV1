@@ -44,7 +44,7 @@ import java.util.Vector;
 
 public class SearchPlant extends Fragment {
     String get_url = "";
-    String token = "T2F6bmtvTG8rSjBNcmhIVnBhUmVZQT09";
+    String token = "r9Ft9FXCoFva7YmQ1W93N5J8wRck-fgxJnUyFZXV15k";
     private static final int REQUEST_CODE_SHOW_RESPONSE_TEXT = 1;
     private Handler uiUpdater = null;
     private static final String plantInfoKey = "plantInfoKey";
@@ -145,14 +145,19 @@ public class SearchPlant extends Fragment {
                             //To be used to get all the info we need
                             Gson gson = new Gson();
                             Plants plant = gson.fromJson(responseText, Plants.class);
-                            System.out.println("Response: "+responseText);
-                            String complete_data = plant.getMain_species().getComplete_data();
+                            System.out.println("Response: " + responseText);
+                            System.out.println("Plant sci name: " + plant.getScientific_name());
+                            System.out.println("Plant id: " + plant.getId());
+                            System.out.println("Plant com name: " + plant.getCommon_name());
+                            System.out.println("Plant images: " + plant.getImages());
+                            System.out.println("Plant main species: " + plant.getMain_species());
+                            /*String complete_data = plant.getMain_species().getComplete_data();
                             if(complete_data == null){
                                 System.out.println("---------- We do not have complete data on the plant");
                             }else if(complete_data.equals("true")){
                                 System.out.println("---------- We have complete data on the plant");
                             }
-
+                            */
                             //Get the plant specifics
                             sciTextView = (TextView) getView().findViewById(R.id.sciNameFill);
                             comTextView = (TextView) getView().findViewById(R.id.commNameFill);
@@ -171,14 +176,14 @@ public class SearchPlant extends Fragment {
                             fruitSeedSeedRangeTV= (TextView) getView().findViewById(R.id.fruitSeedSeedRangeFill);
                             fruitSeedSeedPersistenceTV = (TextView) getView().findViewById(R.id.fruitSeedSeedPersistenceFill);
                             //Growth info
-                           growthPhRangeTV = (TextView) getView().findViewById(R.id.growthPhRangeFill);
-                           precipMaxInchesTV = (TextView) getView().findViewById(R.id.precipRangeFill);
-                           tempMinCTV = (TextView) getView().findViewById(R.id.tempMinCFFill);
+                            growthPhRangeTV = (TextView) getView().findViewById(R.id.growthPhRangeFill);
+                            precipMaxInchesTV = (TextView) getView().findViewById(R.id.precipRangeFill);
+                            tempMinCTV = (TextView) getView().findViewById(R.id.tempMinCFFill);
                             //Specification info
-                           speciGrowthFormTV = (TextView) getView().findViewById(R.id.specificationGrowthFormFill);
-                           speciGrowthHabitTV = (TextView) getView().findViewById(R.id.specificationGrowthHabitFill);
-                           speciGrowthRateTV = (TextView) getView().findViewById(R.id.specificationGrowthRateFill);
-                           speciGrowthShapeTV = (TextView) getView().findViewById(R.id.specificationShapeOriFill);
+                            speciGrowthFormTV = (TextView) getView().findViewById(R.id.specificationGrowthFormFill);
+                            speciGrowthHabitTV = (TextView) getView().findViewById(R.id.specificationGrowthHabitFill);
+                            speciGrowthRateTV = (TextView) getView().findViewById(R.id.specificationGrowthRateFill);
+                            speciGrowthShapeTV = (TextView) getView().findViewById(R.id.specificationShapeOriFill);
                             //Seed info
                             seedBloomPeriodTV = (TextView) getView().findViewById(R.id.seedBloomPeriodFill);
                             seedCommAvTV = (TextView) getView().findViewById(R.id.seedCommAvFill);
@@ -450,7 +455,7 @@ public class SearchPlant extends Fragment {
     //Call child thread
     private void searchPlantInfo(int plantId){
         System.out.println("----------Plant Id: "+ plantId);
-        get_url = "https://trefle.io/api/plants/"+ plantId +"?token="+token;
+        get_url = "https://trefle.io/api/v1/plants/"+ plantId +"?token="+token;
         //System.out.println(get_url);
         getSpecificPlantInfo(get_url);    //Create child thread to do GET request
     }
