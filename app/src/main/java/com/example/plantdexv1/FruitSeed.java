@@ -1,44 +1,42 @@
 package com.example.plantdexv1;
 
 class FruitSeed {
-    String color;
-    String conspicuous;
-    String seed_abundance;
-    String seed_period_begin;
-    String seed_period_end;
-    String seed_persistence;
+    String[] color;
+    boolean conspicuous;
+    boolean seed_persistence;
+    String shape;
 
-    public FruitSeed(String color, String conspicuous, String seed_abundance, String seed_period_begin, String seed_period_end, String seed_persistence) {
+    public FruitSeed(String[] color, boolean conspicuous, boolean seed_persistence, String shape) {
         this.color = color;
         this.conspicuous = conspicuous;
-        this.seed_abundance = seed_abundance;
-        this.seed_period_begin = seed_period_begin;
-        this.seed_period_end = seed_period_end;
         this.seed_persistence = seed_persistence;
+        this.shape = shape;
     }
 
-    //Getters
     public String getColor() {
-        return color;
+        StringBuilder sb = new StringBuilder();
+        if(color != null){
+            for(int i = 0; i < color.length; i++){
+                sb.append(color[i]);
+                if(i + 1 < color.length){
+                    sb.append(", ");
+                }
+            }
+        }else{
+            return sb.append("No Info").toString();
+        }
+        return sb.toString();
     }
 
-    public String getConspicuous() {
+    public boolean isConspicuous() {
         return conspicuous;
     }
 
-    public String getSeed_abundance() {
-        return seed_abundance;
-    }
-
-    public String getSeed_period_begin() {
-        return seed_period_begin;
-    }
-
-    public String getSeed_period_end() {
-        return seed_period_end;
-    }
-
-    public String getSeed_persistence() {
+    public boolean isSeed_persistence() {
         return seed_persistence;
+    }
+
+    public String getShape() {
+        return shape;
     }
 }

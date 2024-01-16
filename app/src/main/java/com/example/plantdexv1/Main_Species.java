@@ -1,8 +1,6 @@
 package com.example.plantdexv1;
 
 public class Main_Species {
-
-    String complete_data;
     Flower flower;
     Foliage foliage;
     FruitSeed fruit_or_seed;
@@ -10,8 +8,7 @@ public class Main_Species {
     Seed seed;
     Specification specifications;
 
-    public Main_Species(String complete_data, Flower flower, Foliage foliage, FruitSeed fruit_or_seed, Growth growth, Seed seed, Specification specifications) {
-        this.complete_data = complete_data;
+    public Main_Species(Flower flower, Foliage foliage, FruitSeed fruit_or_seed, Growth growth, Seed seed, Specification specifications) {
         this.flower = flower;
         this.foliage = foliage;
         this.fruit_or_seed = fruit_or_seed;
@@ -21,9 +18,7 @@ public class Main_Species {
     }
 
     //Getters
-    public String getComplete_data() {
-        return complete_data;
-    }
+
     public Flower getFlower() {
         return flower;
     }

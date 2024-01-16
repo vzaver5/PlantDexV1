@@ -138,7 +138,7 @@ public class FirstFragment extends Fragment{
                             final String responseText = bundle.getString(plantListKey);
                             System.out.println("Received from the HTTPReq:" + responseText);
                             //Array of string(com/sci/id) for adapter
-                            String[] resultingList = parseJSONForPlantName(responseText,pageNumber);
+                            String[] resultingList = parseJSONForPlantName(responseText, pageNumber);
 
                             //User had a garbage search criterion
                             if(resultingList.length == 0){
@@ -327,11 +327,16 @@ public class FirstFragment extends Fragment{
         for (int i = 0; i < jsonArray.size(); i++) {
             //Receive each plant
             Plants plants = gson.fromJson(jsonArray.get(i), Plants.class);
+            System.out.println("Plant sci name: " + plants.getScientific_name());
+            System.out.println("Plant id: " + plants.getId());
+            System.out.println("Plant com name: " + plants.getCommon_name());
+            System.out.println("Plant images: " + plants.getImages());
+            //System.out.println("Plant main species: " + plants.getMain_species());
             //Print sci name and common name of the plant
             if(plants.getCommon_name() == null){
                 returnArr[i] = "\n" + (20*pageNumber+i+1) + ". " + plants.getScientific_name();
             }else{
-                returnArr[i] = "\n" + (20*pageNumber+i+1) + ". " + plants.getCommon_name() + "/" + plants.getScientific_name();
+                returnArr[i] = "\n" + (20*pageNumber+i+1) + ". " + plants.getCommon_name() + " / " + plants.getScientific_name();
             }
         }
         return returnArr;
@@ -342,8 +347,6 @@ public class FirstFragment extends Fragment{
         Gson gson= new Gson();
         JsonObject jsonObject = JsonParser.parseString(jsonString).getAsJsonObject();
         JsonArray jsonArray = jsonObject.getAsJsonArray("data");
-        //JsonParser parser = new JsonParser();
-        //JsonArray array = parser.parse(jsonString).getAsJsonArray();
         Plants selectedPlant = gson.fromJson(jsonArray.get(position), Plants.class);
         int plantId = selectedPlant.getId();
         System.out.println("The plant's id is:" + plantId);

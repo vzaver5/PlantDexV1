@@ -4,20 +4,20 @@ public class Plants {
     String scientific_name;
     int id;
     String common_name;
-    Images[] images;
-    Main_Species main_species;
+    String image_url;
+    MainSpecies main_species;
 
-    public Plants(String scientific_name, int id, String common_name, Images[] images, Main_Species main_species){
+    public Plants(String scientific_name, int id, String common_name, String image_url, MainSpecies main_species){
         this.scientific_name = scientific_name;
         this.id = id;
         this.common_name = common_name;
-        this.images = images;
+        this.image_url = image_url;
         this.main_species = main_species;
     }
 
     //Getters
-    public Images[] getImages() {
-        return images;
+    public String getImages() {
+        return image_url;
     }
 
     public String getScientific_name() {
@@ -32,7 +32,7 @@ public class Plants {
         return common_name;
     }
 
-    public Main_Species getMain_species() {
+    public MainSpecies getMain_species() {
         return main_species;
     }
 }

@@ -1,25 +1,31 @@
 package com.example.plantdexv1;
 
 class Flower {
-    String color;
-    String conspicuous;
+    String[] color;
+    boolean conspicuous;
 
-    public Flower(String color, String conspicuous){
+    public Flower(String[] color, boolean conspicuous){
         this.color = color;
         this.conspicuous = conspicuous;
     }
 
     //Getters
     public String getColor() {
+        StringBuilder sb = new StringBuilder();
         if(color != null){
-            return color;
+            for(int i = 0; i < color.length; i++){
+                sb.append(color[i]);
+                if(i + 1 < color.length){
+                    sb.append(", ");
+                }
+            }
         }else{
-            return color = "NoInfo";
+            return sb.append("No Info").toString();
         }
-
+        return sb.toString();
     }
 
-    public String getConspicuous() {
+    public boolean isConspicuous() {
         return conspicuous;
     }
 }

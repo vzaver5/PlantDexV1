@@ -39,6 +39,7 @@ public class User {
         this.virtualGarden.add(plant);
     }
     /*
+    TODO:
     //Add to virtualGarden
     public void addToVirtualGarden(String plant){
         boolean nullFound = false;
