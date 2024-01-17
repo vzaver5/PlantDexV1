@@ -6,23 +6,6 @@ Root root = om.readValue(myJsonString, Root.class); */
 
 
 public class MainSpecies{
-    public Flower getFlower() {
-        return flower;
-    }
-    public Foliage getFoliage() {
-        return foliage;
-    }
-    public FruitSeed getFruit_or_seed() {
-        return fruit_or_seed;
-    }
-    public Growth getGrowth() {
-        return growth;
-    }
-
-    public Specification getSpecifications() {
-        return specifications;
-    }
-
     public String status;
     public String rank;
     public Object family_common_name;
@@ -41,6 +24,25 @@ public class MainSpecies{
     public FruitSeed fruit_or_seed;
     public Specification specifications;
     public Growth growth;
+
+    public Flower getFlower() {
+        return flower;
+    }
+    public Foliage getFoliage() {
+        return foliage;
+    }
+    public FruitSeed getFruit_or_seed() {
+        return fruit_or_seed;
+    }
+    public Growth getGrowth() {
+        return growth;
+    }
+    public Specification getSpecifications() {
+        return specifications;
+    }
+    public ImagesPlants getImages() {
+        return images;
+    }
 }
 
 class Distributions{
@@ -51,6 +53,7 @@ class Distributions{
     public Object[] absent;
     public Object[] extinct;
 }
+
 
 
 

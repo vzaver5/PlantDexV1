@@ -14,8 +14,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,6 +46,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Vector;
 import com.google.gson.JsonElement;
 
@@ -78,6 +82,9 @@ public class SearchPlant extends Fragment {
     ImageView imgV;
     Button addToGarden;
     int currentPic = 0;
+    ImagesPlants.ImageSet[] globalImageSet;
+    //Array list of pics
+    ArrayList<String> imgSet = new ArrayList<String>();
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -173,6 +180,68 @@ public class SearchPlant extends Fragment {
                             speciGrowthShapeTV = (TextView) getView().findViewById(R.id.specificationShapeOriFill);
                             //Pictures
                             imgV = (ImageView) getView().findViewById(R.id.plantImage);
+                            Spinner spinner = (Spinner) getView().findViewById(R.id.images_list_spinner);
+                            ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+                                    getContext(),
+                                    R.array.images_list,
+                                    android.R.layout.simple_spinner_item
+                            );
+                            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            spinner.setAdapter(adapter);
+                            spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                String setImgOneUrl;
+                                @Override
+                                public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                                    String selectedImageSet = spinner.getSelectedItem().toString();
+                                    imgSet.clear();
+                                    if (selectedImageSet.equalsIgnoreCase("plant")) {
+                                        setImgOneUrl = plant.getImages();
+                                    } else if(selectedImageSet.equalsIgnoreCase("leaf")) {
+                                        globalImageSet = plant.getMain_species().getImages().getLeaf();
+                                        for(int i=0; i < globalImageSet.length; i++){
+                                            imgSet.add(globalImageSet[i].getImage_url());
+                                        }
+                                        setImgOneUrl = globalImageSet[0].getImage_url();
+                                    } else if (selectedImageSet.equalsIgnoreCase("bark")) {
+                                        ImagesPlants.ImageSet[] globalImageSet = plant.getMain_species().getImages().getBark();
+                                        for(int i=0; i < globalImageSet.length; i++){
+                                            imgSet.add(globalImageSet[i].getImage_url());
+                                        }
+                                        setImgOneUrl = globalImageSet[0].getImage_url();
+                                    } else if(selectedImageSet.equalsIgnoreCase("habit")) {
+                                        ImagesPlants.ImageSet[] globalImageSet = plant.getMain_species().getImages().getHabit();
+                                        for(int i=0; i < globalImageSet.length; i++){
+                                            imgSet.add(globalImageSet[i].getImage_url());
+                                        }
+                                        setImgOneUrl = globalImageSet[0].getImage_url();
+                                    } else if(selectedImageSet.equalsIgnoreCase("flower")) {
+                                        ImagesPlants.ImageSet[] globalImageSet = plant.getMain_species().getImages().getFlower();
+                                        for(int i=0; i < globalImageSet.length; i++){
+                                            imgSet.add(globalImageSet[i].getImage_url());
+                                        }
+                                        setImgOneUrl = globalImageSet[0].getImage_url();
+                                    } else if(selectedImageSet.equalsIgnoreCase("fruit")) {
+                                        ImagesPlants.ImageSet[] globalImageSet = plant.getMain_species().getImages().getFruit();
+                                        for(int i=0; i < globalImageSet.length; i++){
+                                            imgSet.add(globalImageSet[i].getImage_url());
+                                        }
+                                        setImgOneUrl = globalImageSet[0].getImage_url();
+                                    } else if(selectedImageSet.equalsIgnoreCase("other")) {
+                                        ImagesPlants.ImageSet[] globalImageSet = plant.getMain_species().getImages().getOther();
+                                        for(int i=0; i < globalImageSet.length; i++){
+                                            imgSet.add(globalImageSet[i].getImage_url());
+                                        }
+                                        setImgOneUrl = globalImageSet[0].getImage_url();
+                                    }
+                                    Picasso.get().load(setImgOneUrl).into(imgV);
+                                }
+
+                                @Override
+                                public void onNothingSelected(AdapterView<?> parentView) {
+                                    System.out.println("Nothing is selected...");
+                                }
+                            });
+
                             //Add to garden
                             addToGarden = (Button) getView().findViewById(R.id.addToGarden);
 
@@ -220,44 +289,27 @@ public class SearchPlant extends Fragment {
                                     //If yes : "Added to Garden"
                                     //If no  : "Add to Garden"
 
-                            //TODO:
-                                //Add a drop down for the different picture types available found in main_species->images
-                                //Images is an array
-                                //The drop down content will be each index of the array
-                                //Then, the images will load from that index's array.
-                                //Make sure it remains clickable and rotates between the pics
+                            //Display into imgV
+                            //Clicking on the picture will iterate through the pictures
+                            imgV.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    System.out.println("You clicked the image");
+                                    //Logic for looping through array pics
+                                    if((currentPic+1) < imgSet.size()){
+                                        currentPic++;
+                                        Picasso.get().load(imgSet.get(currentPic)).into(imgV);
+                                    }else{
+                                        if(spinner.getSelectedItem().toString().equals("Plant")){
 
-                            //Assign pictures
-                            final String plantUrl = plant.getImages();
-                            Picasso.get().load(plantUrl).into(imgV);
-                            /*
-                            final String[] plantUrls = parseJsonPlantPic(plant);
-                            if(plantUrls.length != 0){
-                                //Display into plantImage
-                                //Load the first image up
-                                Picasso.get().load(plantUrls[currentPic]).into(imgV);
-
-                                //Clicking on the picture will iterate through the pictures
-                                imgV.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        System.out.println("You clicked the image");
-                                        //Be able to rotate through the pictures while
-                                        //You still are iterating thru the array
-                                        if((currentPic+1) < plantUrls.length){
-                                            currentPic++;
-                                            System.out.println("count after click:" + currentPic);
-                                            Picasso.get().load(plantUrls[currentPic]).into(imgV);
                                         }else{
-                                            System.out.println("restarting count");
                                             currentPic = 0;
-                                            Picasso.get().load(plantUrls[currentPic]).into(imgV);
+                                            Picasso.get().load(imgSet.get(currentPic)).into(imgV);
                                         }
                                     }
-                                });
+                                }
+                            });
 
-                            }
-                            */
 
                             //Assign Flower Color
                             if(plant.getMain_species().getFlower().getColor() != null) {
@@ -467,20 +519,6 @@ public class SearchPlant extends Fragment {
         if(plant.getCommon_name() != null){
             response = response + plant.getCommon_name();
         }
-        return response;
-    }
-
-    //Return: String array that has urls of pics of the plant
-    static String[] parseJsonPlantPic(Plants plant){
-        //String[] response = new String[plant.getImages().length];
-        String[] response = {""};
-        //Confirm that we have urls
-        /*if(plant.getImages().length != 0) {
-            for(int i = 0; i < plant.getImages().length; i++) {
-                response[i] = plant.getImages()[i].getUrl();
-            }
-        }
-         */
         return response;
     }
 

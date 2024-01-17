@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <string-array name="images_list">
+        <item>Plant</item>
+        <item>Leaf</item>
+        <item>Bark</item>
+        <item>Habit</item>
+        <item>Flower</item>
+        <item>Fruit</item>
+        <item>Other</item>
+    </string-array>
+</resources>
