@@ -23,10 +23,18 @@ class Specification {
         this.toxicity = toxicity;
     }
     class MaximumHeight{
-        public Object cm;
+        public Integer cm;
+
+        public Integer getCm() {
+            return cm;
+        }
     }
     class AverageHeight{
-        public Object cm;
+        public Integer cm;
+
+        public Integer getCm() {
+            return cm;
+        }
     }
 
     public String getGrowth_form() {
@@ -43,5 +51,13 @@ class Specification {
 
     public String getShape_and_orientation() {
         return shape_and_orientation;
+    }
+
+    public AverageHeight getAverage_height() {
+        return average_height;
+    }
+
+    public MaximumHeight getMaximum_height() {
+        return maximum_height;
     }
 }

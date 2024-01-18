@@ -13,12 +13,12 @@
 
     <Spinner
         android:id="@+id/images_list_spinner"
-        android:layout_width="176dp"
-        android:layout_height="25dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="12dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fruitSeedSeedPersistenceFill" />
+        android:layout_width="200dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/specificationInfo"
@@ -29,7 +29,7 @@
         android:text="Specification Info"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/plantImage"
         app:layout_constraintTop_toBottomOf="@+id/tempMinCFFill" />
 
     <TextView
@@ -41,8 +41,8 @@
         android:text="Growth Info"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/flowerConsFill" />
+        app:layout_constraintStart_toEndOf="@+id/plantImage"
+        app:layout_constraintTop_toBottomOf="@+id/commNameFill" />
 
     <TextView
         android:id="@+id/fruitSeedInfo"
@@ -50,41 +50,41 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="15dp"
-        android:text="Fruit Or Seed info"
+        android:text="Fruit/Seed Info"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/plantImage"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/foliageTextureFill" />
 
     <TextView
         android:id="@+id/sciNameFill"
         android:layout_width="wrap_content"
-        android:layout_height="16dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
+        android:text="Scientific Name"
         android:textAlignment="viewStart"
         android:textAllCaps="false"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/addToGarden"
         app:layout_constraintStart_toEndOf="@+id/plantImage"
         app:layout_constraintTop_toBottomOf="@+id/addToGarden" />
 
     <TextView
         android:id="@+id/commNameFill"
         android:layout_width="wrap_content"
-        android:layout_height="16dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
+        android:text="Common Name"
         android:textAlignment="viewStart"
-        android:textAllCaps="true"
-        app:layout_constraintEnd_toEndOf="@+id/addToGarden"
+        android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/plantImage"
         app:layout_constraintTop_toBottomOf="@+id/sciNameFill" />
 
     <TextView
         android:id="@+id/flowerColorFill"
-        android:layout_width="199dp"
-        android:layout_height="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:text="Flower Color: "
@@ -94,151 +94,163 @@
 
     <TextView
         android:id="@+id/flowerConsFill"
-        android:layout_width="0dp"
-        android:layout_height="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:text="Flower Conspicuous: "
         android:textAlignment="viewStart"
-        app:layout_constraintEnd_toEndOf="@+id/plantImage"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/flowerColorFill" />
 
     <TextView
         android:id="@+id/foliageColorFill"
-        android:layout_width="0dp"
-        android:layout_height="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="Foliage Color: "
         android:textAlignment="viewStart"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/foliageInfo"
         app:layout_constraintTop_toBottomOf="@+id/foliageInfo" />
 
     <TextView
         android:id="@+id/foliageTextureFill"
-        android:layout_width="0dp"
-        android:layout_height="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="Foliage Texture: "
         android:textAlignment="viewStart"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/foliageInfo"
         app:layout_constraintTop_toBottomOf="@+id/foliageColorFill" />
 
     <TextView
         android:id="@+id/fruitSeedColorFill"
-        android:layout_width="0dp"
-        android:layout_height="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Fruit/Seed Color:"
+        android:text="Fruit/Seed Color: "
         android:textAlignment="viewStart"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/fruitSeedInfo"
         app:layout_constraintTop_toBottomOf="@+id/fruitSeedInfo" />
 
     <TextView
         android:id="@+id/fruitSeedConsFill"
-        android:layout_width="0dp"
-        android:layout_height="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="Flower Conspicuous: "
         android:textAlignment="viewStart"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/fruitSeedInfo"
         app:layout_constraintTop_toBottomOf="@+id/fruitSeedColorFill" />
 
     <TextView
         android:id="@+id/fruitSeedSeedPersistenceFill"
-        android:layout_width="0dp"
-        android:layout_height="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="Seed Persistance: "
         android:textAlignment="viewStart"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/fruitSeedInfo"
         app:layout_constraintTop_toBottomOf="@+id/fruitSeedConsFill" />
 
     <TextView
+        android:id="@+id/fruitSeedShape"
+        android:layout_width="190dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Seed Shape: "
+        android:textAlignment="viewStart"
+        app:layout_constraintStart_toStartOf="@+id/fruitSeedInfo"
+        app:layout_constraintTop_toBottomOf="@+id/fruitSeedSeedPersistenceFill" />
+
+    <TextView
         android:id="@+id/growthPhRangeFill"
-        android:layout_width="0dp"
-        android:layout_height="16dp"
-        android:layout_marginStart="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="pH Range: "
         android:textAlignment="viewStart"
-        app:layout_constraintEnd_toEndOf="@+id/flowerConsFill"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/growthInformation"
         app:layout_constraintTop_toBottomOf="@+id/growthInformation" />
 
     <TextView
         android:id="@+id/precipRangeFill"
-        android:layout_width="0dp"
-        android:layout_height="16dp"
-        android:layout_marginStart="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="Precipitation Range: "
         android:textAlignment="viewStart"
-        app:layout_constraintEnd_toEndOf="@+id/growthPhRangeFill"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="10dp"
+        app:layout_constraintStart_toStartOf="@+id/growthPhRangeFill"
         app:layout_constraintTop_toBottomOf="@+id/growthPhRangeFill" />
 
     <TextView
         android:id="@+id/tempMinCFFill"
-        android:layout_width="0dp"
-        android:layout_height="16dp"
-        android:layout_marginStart="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="Min Temp: "
         android:textAlignment="viewStart"
-        app:layout_constraintEnd_toEndOf="@+id/precipRangeFill"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/precipRangeFill"
         app:layout_constraintTop_toBottomOf="@+id/precipRangeFill" />
 
     <TextView
         android:id="@+id/specificationGrowthFormFill"
-        android:layout_width="0dp"
-        android:layout_height="16dp"
-        android:layout_marginStart="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="Growth Form: "
         android:textAlignment="viewStart"
-        app:layout_constraintEnd_toEndOf="@+id/tempMinCFFill"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/specificationInfo"
         app:layout_constraintTop_toBottomOf="@+id/specificationInfo" />
 
     <TextView
         android:id="@+id/specificationGrowthHabitFill"
-        android:layout_width="0dp"
-        android:layout_height="16dp"
-        android:layout_marginStart="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="Growth Habit: "
         android:textAlignment="viewStart"
-        app:layout_constraintEnd_toEndOf="@+id/specificationGrowthFormFill"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/specificationGrowthFormFill"
         app:layout_constraintTop_toBottomOf="@+id/specificationGrowthFormFill" />
 
     <TextView
         android:id="@+id/specificationGrowthRateFill"
-        android:layout_width="200dp"
-        android:layout_height="20dp"
-        android:layout_marginStart="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="Growth Rate: "
         android:textAlignment="viewStart"
-        app:layout_constraintEnd_toEndOf="@+id/specificationShapeOriFill"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/specificationShapeOriFill"
         app:layout_constraintTop_toBottomOf="@+id/specificationShapeOriFill" />
 
     <TextView
+        android:id="@+id/specificationAvgHeight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Average Height: "
+        android:textAlignment="viewStart"
+        app:layout_constraintStart_toStartOf="@+id/specificationMaxHeight"
+        app:layout_constraintTop_toBottomOf="@+id/specificationMaxHeight" />
+
+    <TextView
+        android:id="@+id/specificationMaxHeight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Max Height: "
+        android:textAlignment="viewStart"
+        app:layout_constraintStart_toStartOf="@+id/specificationGrowthRateFill"
+        app:layout_constraintTop_toBottomOf="@+id/specificationGrowthRateFill" />
+
+    <TextView
         android:id="@+id/specificationShapeOriFill"
-        android:layout_width="200dp"
-        android:layout_height="17dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="Growth Shape: "
         android:textAlignment="viewStart"
-        app:layout_constraintEnd_toEndOf="@+id/specificationGrowthHabitFill"
         app:layout_constraintStart_toStartOf="@+id/specificationGrowthHabitFill"
         app:layout_constraintTop_toBottomOf="@+id/specificationGrowthHabitFill" />
 
@@ -247,14 +259,14 @@
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="176dp"
         android:contentDescription="Location of pictures of the plant"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/images_list_spinner"
         tools:srcCompat="@tools:sample/avatars" />
 
     <Button
@@ -274,7 +286,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
         android:text="Flower Info"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -290,7 +302,7 @@
         android:text="Foliage Info"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/plantImage"
-        app:layout_constraintTop_toBottomOf="@+id/commNameFill" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/flowerConsFill" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

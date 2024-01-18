@@ -3,13 +3,13 @@ package com.example.plantdexv1;
 class Growth {
     public String description;
     public String sowing;
-    public int days_to_harvest;
+    public Integer days_to_harvest;
     public RowSpacing row_spacing;
     public Spread spread;
-    public int ph_maximum;
-    public int ph_minimum;
-    public int light;
-    public int atmospheric_humidity;
+    public Integer ph_maximum;
+    public Integer ph_minimum;
+    public Integer light;
+    public Integer atmospheric_humidity;
     public String[] growth_months;
     public String[] bloom_months;
     public String[] fruit_months;
@@ -18,12 +18,12 @@ class Growth {
     public MinimumRootDepth minimum_root_depth;
     public MinimumTemperature minimum_temperature;
     public MaximumTemperature maximum_temperature;
-    public int soil_nutriments;
-    public int soil_salinity;
-    public int soil_texture;
-    public int soil_humidity;
+    public Integer soil_nutriments;
+    public Integer soil_salinity;
+    public Integer soil_texture;
+    public Integer soil_humidity;
 
-    public Growth(String description, String sowing, int days_to_harvest, RowSpacing row_spacing, Spread spread, int ph_maximum, int ph_minimum, int light, int atmospheric_humidity, String[] growth_months, String[] bloom_months, String[] fruit_months, MinimumPrecipitation minimum_precipitation, MaximumPrecipitation maximum_precipitation, MinimumRootDepth minimum_root_depth, MinimumTemperature minimum_temperature, MaximumTemperature maximum_temperature, int soil_nutriments, int soil_salinity, int soil_texture, int soil_humidity) {
+    public Growth(String description, String sowing, Integer days_to_harvest, RowSpacing row_spacing, Spread spread, Integer ph_maximum, Integer ph_minimum, Integer light, Integer atmospheric_humidity, String[] growth_months, String[] bloom_months, String[] fruit_months, MinimumPrecipitation minimum_precipitation, MaximumPrecipitation maximum_precipitation, MinimumRootDepth minimum_root_depth, MinimumTemperature minimum_temperature, MaximumTemperature maximum_temperature, Integer soil_nutriments, Integer soil_salinity, Integer soil_texture, Integer soil_humidity) {
         this.description = description;
         this.sowing = sowing;
         this.days_to_harvest = days_to_harvest;
@@ -48,17 +48,17 @@ class Growth {
     }
 
     class MaximumPrecipitation{
-        public int getMm() {
+        public Integer getMm() {
             return mm;
         }
 
-        public int mm;
+        public Integer mm;
     }
 
     class MinimumPrecipitation{
-        public int mm;
+        public Integer mm;
 
-        public int getMm() {
+        public Integer getMm() {
             return mm;
         }
     }
@@ -76,14 +76,14 @@ class Growth {
         }
     }
     class MinimumTemperature{
-        public int deg_f;
-        public int deg_c;
+        public Integer deg_f;
+        public Integer deg_c;
 
-        public int getDeg_f() {
+        public Integer getDeg_f() {
             return deg_f;
         }
 
-        public int getDeg_c() {
+        public Integer getDeg_c() {
             return deg_c;
         }
     }
@@ -107,11 +107,11 @@ class Growth {
         return maximum_precipitation;
     }
 
-    public int getPh_maximum() {
+    public Integer getPh_maximum() {
         return ph_maximum;
     }
 
-    public int getPh_minimum() {
+    public Integer getPh_minimum() {
         return ph_minimum;
     }
 
