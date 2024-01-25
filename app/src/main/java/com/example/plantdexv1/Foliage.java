@@ -11,22 +11,8 @@ class Foliage {
         this.leaf_retention = leaf_retention;
     }
 
-    public String getColor() {
-        StringBuilder sb = new StringBuilder();
-        if(color != null){
-            for(int i = 0; i < color.length; i++){
-                sb.append(color[i]);
-                if(i + 1 < color.length){
-                    sb.append(", ");
-                }
-            }
-        }else{
-            return sb.append("No Info").toString();
-        }
-        return sb.toString();
-    }
-    public boolean isLeaf_retention() {
-        return leaf_retention;
+    public String[] getColor() {
+        return color;
     }
 
     public String getTexture() {

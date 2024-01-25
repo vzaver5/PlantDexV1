@@ -30,7 +30,7 @@ class Growth {
         this.row_spacing = row_spacing;
         this.spread = spread;
         this.ph_maximum = ph_maximum;
-        this.ph_minimum = ph_minimum;
+        this.ph_minimum = ph_minimum ;
         this.light = light;
         this.atmospheric_humidity = atmospheric_humidity;
         this.growth_months = growth_months;
@@ -88,6 +88,18 @@ class Growth {
         }
     }
 
+    public String[] getGrowth_months() {
+        return growth_months;
+    }
+
+    public String[] getBloom_months() {
+        return bloom_months;
+    }
+
+    public String[] getFruit_months() {
+        return fruit_months;
+    }
+
     class MinimumRootDepth{
         public Object cm;
     }
@@ -122,4 +134,5 @@ class Growth {
     public MaximumTemperature getMaximum_temperature() {
         return maximum_temperature;
     }
+
 }

@@ -10,19 +10,8 @@ class Flower {
     }
 
     //Getters
-    public String getColor() {
-        StringBuilder sb = new StringBuilder();
-        if(color != null){
-            for(int i = 0; i < color.length; i++){
-                sb.append(color[i]);
-                if(i + 1 < color.length){
-                    sb.append(", ");
-                }
-            }
-        }else{
-            return sb.append("No Info").toString();
-        }
-        return sb.toString();
+    public String[] getColor() {
+        return color;
     }
 
     public boolean isConspicuous() {

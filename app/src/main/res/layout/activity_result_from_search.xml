@@ -30,7 +30,7 @@
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/plantImage"
-        app:layout_constraintTop_toBottomOf="@+id/tempMinCFFill" />
+        app:layout_constraintTop_toBottomOf="@+id/fruitMonthsFill" />
 
     <TextView
         android:id="@+id/growthInformation"
@@ -85,22 +85,20 @@
         android:id="@+id/flowerColorFill"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:text="Flower Color: "
         android:textAlignment="viewStart"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/flowerInfo"
         app:layout_constraintTop_toBottomOf="@+id/flowerInfo" />
 
     <TextView
         android:id="@+id/flowerConsFill"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:text="Flower Conspicuous: "
         android:textAlignment="viewStart"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/flowerInfo"
         app:layout_constraintTop_toBottomOf="@+id/flowerColorFill" />
 
     <TextView
@@ -155,7 +153,7 @@
 
     <TextView
         android:id="@+id/fruitSeedShape"
-        android:layout_width="190dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="Seed Shape: "
@@ -165,7 +163,7 @@
 
     <TextView
         android:id="@+id/growthPhRangeFill"
-        android:layout_width="wrap_content"
+        android:layout_width="178dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="pH Range: "
@@ -175,30 +173,64 @@
 
     <TextView
         android:id="@+id/precipRangeFill"
-        android:layout_width="wrap_content"
+        android:layout_width="178dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:maxLines="2"
         android:text="Precipitation Range: "
         android:textAlignment="viewStart"
-        app:layout_constraintEnd_toEndOf="10dp"
-        app:layout_constraintStart_toStartOf="@+id/growthPhRangeFill"
+        app:layout_constraintStart_toStartOf="@+id/growthInformation"
         app:layout_constraintTop_toBottomOf="@+id/growthPhRangeFill" />
 
     <TextView
         android:id="@+id/tempMinCFFill"
-        android:layout_width="wrap_content"
+        android:layout_width="178dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="Min Temp: "
         android:textAlignment="viewStart"
-        app:layout_constraintStart_toStartOf="@+id/precipRangeFill"
+        app:layout_constraintStart_toStartOf="@+id/growthInformation"
         app:layout_constraintTop_toBottomOf="@+id/precipRangeFill" />
+
+    <TextView
+        android:id="@+id/growthMonthsFill"
+        android:layout_width="178dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:maxLines="2"
+        android:text="Growth Months: "
+        android:textAlignment="viewStart"
+        app:layout_constraintStart_toStartOf="@+id/growthInformation"
+        app:layout_constraintTop_toBottomOf="@+id/tempMinCFFill" />
+
+    <TextView
+        android:id="@+id/bloomMonthsFill"
+        android:layout_width="178dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:maxLines="2"
+        android:text="Bloom Months: "
+        android:textAlignment="viewStart"
+        app:layout_constraintStart_toStartOf="@+id/growthInformation"
+        app:layout_constraintTop_toBottomOf="@+id/growthMonthsFill" />
+
+    <TextView
+        android:id="@+id/fruitMonthsFill"
+        android:layout_width="178dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:maxLines="2"
+        android:text="Fruit Months: "
+        android:textAlignment="viewStart"
+        app:layout_constraintStart_toStartOf="@+id/growthInformation"
+        app:layout_constraintTop_toBottomOf="@+id/bloomMonthsFill" />
 
     <TextView
         android:id="@+id/specificationGrowthFormFill"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:maxLines="2"
         android:text="Growth Form: "
         android:textAlignment="viewStart"
         app:layout_constraintStart_toStartOf="@+id/specificationInfo"
@@ -209,6 +241,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:maxLines="2"
         android:text="Growth Habit: "
         android:textAlignment="viewStart"
         app:layout_constraintStart_toStartOf="@+id/specificationGrowthFormFill"
@@ -219,6 +252,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:maxLines="2"
         android:text="Growth Rate: "
         android:textAlignment="viewStart"
         app:layout_constraintStart_toStartOf="@+id/specificationShapeOriFill"
@@ -229,6 +263,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:maxLines="2"
         android:text="Average Height: "
         android:textAlignment="viewStart"
         app:layout_constraintStart_toStartOf="@+id/specificationMaxHeight"
@@ -239,6 +274,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:maxLines="2"
         android:text="Max Height: "
         android:textAlignment="viewStart"
         app:layout_constraintStart_toStartOf="@+id/specificationGrowthRateFill"
@@ -249,6 +285,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:maxLines="2"
         android:text="Growth Shape: "
         android:textAlignment="viewStart"
         app:layout_constraintStart_toStartOf="@+id/specificationGrowthHabitFill"
