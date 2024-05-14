@@ -1,6 +1,5 @@
 package com.example.plantdexv1;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -99,7 +98,6 @@ public class RegisterActivity extends AppCompatActivity {
         FirebaseUser currentUser = mAuth.getCurrentUser();
     }
 
-
     public void createAccount(final String name, String email, String password){
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -125,12 +123,12 @@ public class RegisterActivity extends AppCompatActivity {
                                     });
                             //Add the user to the database
                             String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                            User registeredUser = new User(name,userId); //Create user object
+                            User registeredUser = new User(name, email, userId); //Create user object
                             DatabaseReference mDB =  FirebaseDatabase.getInstance().getReference();
-                            mDB.child("user:" + userId).child("name").setValue(registeredUser.getName());   //Add userobject to user:userid path
-                            //Testing
+                            mDB.child("userId:" + userId).child("name").setValue(registeredUser.getName());   //Add userobject to user:userid path
+                            mDB.child("userId:" + userId).child("username").setValue(registeredUser.getUsername());   //Add userobject to user:userid path
+                            mDB.child("userId:" + userId).child("virtualGarden").child("count").setValue(0);   //Add userobject to user:userid path
                             //mDB.child("user:" + userId).child("virtualGarden").child("testPlant").setValue(true);   //Add userobject to user:userid path
-
                             finish();   //End register activity return back to login
                             //updateUI(user);
                         } else {
@@ -140,7 +138,6 @@ public class RegisterActivity extends AppCompatActivity {
                                     Toast.LENGTH_SHORT).show();
                             //updateUI(null);
                         }
-
                     }
                 });
     }

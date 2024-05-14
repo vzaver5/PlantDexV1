@@ -33,6 +33,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -59,6 +60,7 @@ public class SearchPlant extends Fragment {
     private DatabaseReference userDb;
     String comName;
     String sciName;
+    String plantId;
     User user;
 
     //Views
@@ -97,7 +99,7 @@ public class SearchPlant extends Fragment {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        userDb = FirebaseDatabase.getInstance().getReference().child("user:" + userId);
+        userDb = FirebaseDatabase.getInstance().getReference().child("userId:" + userId);
         //userDb = FirebaseDatabase.getInstance().getReference().child("user:" + userId).child(FirebaseAuth.getInstance().getCurrentUser().getUid());
     }
 
@@ -273,22 +275,39 @@ public class SearchPlant extends Fragment {
                                 comTextView.setText("No Common Name Given");
                             }
 
-                            //Assign function addToGarden to the Add To Garden button
+                            plantId = parseJsonID(plant);
+
                             //Add plant to userDb
                             addToGarden.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
+                                    //if(){
+                                        //Increase count by 1
+                                    //}
+                                    //If the virtualGarden gets a new child, then update count by 1
                                     //Get the current user info from db
                                     //updateUserInfo();
+                                    //userDb.child("pID").setValue(plantId);
+                                    System.out.println("Trying with getKey?: " + userDb.child("pID").getKey());   //Does this work
+                                    //Query tS = userDb.child("pId").orderByKey().equalTo(plantId).params.getIndexStartValue();
+//                                  System.out.println("TestString: " + tS);
+                                    //Check if plant already exists else add to Db
+//                                    if (userDb.child("pID").getKey()) {
+//
+//                                    } else {
+//                                        userDb.child("pID").setValue(plantId);
+//                                    }
+                                    //Add Plant Name to db
                                     if(!comName.equals("")){
                                         System.out.println("Common name available");
                                         String pn = comName + " , " + sciName;
-                                        userDb.child("virtualGarden").child(pn).setValue(true);     //add to user db
+                                        userDb.child("virtualGarden").child(plantId).setValue(pn);     //add to user db
                                     }else{
                                         System.out.println("Common name not available");
                                         String pn = sciName;
-                                        userDb.child("virtualGarden").child(pn).setValue(true);     //add to user db
+                                        userDb.child("virtualGarden").setValue(pn);     //add to user db
                                     }
+
                                     Toast.makeText(getContext(), "Added to your Garden!", Toast.LENGTH_SHORT).show();
                                 }
                             });
@@ -582,7 +601,6 @@ public class SearchPlant extends Fragment {
 
     //Return: String that has the plant's common name
     static String parseJsonComName(Plants plant){
-
         String response = "";
         if(plant.getCommon_name() != null){
             response = response + plant.getCommon_name();
@@ -590,6 +608,9 @@ public class SearchPlant extends Fragment {
         return response;
     }
 
+    static String parseJsonID(Plants plant){
+        return String.valueOf(plant.getId());
+    }
     public void updateUserInfo(){
         System.out.println("Retrieving the vG info");
         userDb.addChildEventListener(new ChildEventListener() {

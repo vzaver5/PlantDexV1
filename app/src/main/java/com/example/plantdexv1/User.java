@@ -6,6 +6,7 @@ import java.util.List;
 public class User {
     String userId;
     String name;
+    String username;
     List<String> virtualGarden;
     //TODO
     //Images
@@ -14,15 +15,19 @@ public class User {
         //Default constructor for DataSnapshot.getValue(User.class)
     }
 
-    public User(String name, String userId) {
-        this.userId = userId;
+    public User(String name, String username, String userId) {
         this.name = name;
+        this.username = username;
+        this.userId = userId;
         this.virtualGarden = new ArrayList<String>();
     }
 
     //Getters
     public String getName() {
         return name;
+    }
+    public String getUsername() {
+        return username;
     }
     public List<String> getVirtualGarden() {
         return virtualGarden;

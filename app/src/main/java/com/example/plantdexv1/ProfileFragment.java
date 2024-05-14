@@ -26,7 +26,7 @@ import java.util.List;
 
 public class ProfileFragment extends Fragment {
     String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-    DatabaseReference userDb = FirebaseDatabase.getInstance().getReference().child("user:" +userId);
+    DatabaseReference userDb = FirebaseDatabase.getInstance().getReference().child("userId:" + userId);
     TextView nameTextView;
     ListView listView;
 
@@ -51,11 +51,24 @@ public class ProfileFragment extends Fragment {
     public void onViewCreated(@NonNull final View view, final Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         //Get the information from the database and fill in the profile page
+        userDb = FirebaseDatabase.getInstance().getReference().child("userId:" + userId);
         //User's name
         String name = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
         nameTextView = (TextView) getView().findViewById(R.id.nameProfileFragment);
         nameTextView.setText(name);
+
+        //For loop through userdb->virtualgarden, to get the value(ie: name) and store into
+        //resultingList
+        //Adapter = resultingList
+        //listView shows adapter.
+        //String[] resultingList;
+        //for(int i = 0; i < ){
+        //}
+        System.out.println("The length of saved Virtual Garden is: " + userDb.child("virtualGarden").child("count"));
         listView = (ListView) getView().findViewById(R.id.virtualGardenListView);
+        //ArrayAdapter<String> adapter  = new ArrayAdapter<String>(getContext(),
+        //                            android.R.layout.simple_list_item_1, resultingList);
+        //listView.setAdapter(adapter);
 
 
         //Virtual Garden
